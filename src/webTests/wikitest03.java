@@ -8,75 +8,151 @@ import java.net.http.HttpResponse;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class wikitest03 { 
+public class wikitest03 
+{
 
     public static void main(String[] args) throws IOException, InterruptedException 
     {
-        // 1. Crear cliente HTTP
-        HttpClient client = HttpClient.newBuilder().build();
-
-        // 2. Crear solicitud HTTP 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_b%C3%A1sicas_de_Wikipedia"))
-                .GET() // solicitud GET
-                .build();
-
-        // 3. Enviar solicitud y recibir respuesta
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        // 4. Analizar código de estado
-        int statusCode = response.statusCode();
-        System.out.println("Código de estado correcto: " + statusCode);
-        if (statusCode != 200) 
-        {
-            System.out.println("Error al obtener la página Wikipedia:Bienvenidos#Normas_básicas_de_Wikipedia");
-            return;
-        }
-
-        // 5. Obtener cuerpo de la respuesta (HTML)
-        String html = response.body();
-
-        // 6. Buscar título de la página con expresión regular
-        Pattern titlePattern = Pattern.compile("<title>(.*?)</title>");
-        Matcher titleMatcher = titlePattern.matcher(html);
-
-        if (titleMatcher.find()) 
-        {
-            String title = titleMatcher.group(1);
-            System.out.println("El título de la página es: " + title);
+        pruebaCodigoDeEstado();
+        pruebaTituloDeLaPagina();
+        pruebaNumeroDeEnlaces();
+        pruebaTextoEspecifico();
+        pruebaElementoPorId();
+    }
+    public static void pruebaCodigoDeEstado() throws IOException, InterruptedException 
+    {
+        String descripcion = "Verificar que el código de estado de la página sea 200 (OK)";
+        int statusCode = obtenerCodigoDeEstado("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_b%C3%A1sicas_de_Wikipedia");
+        System.out.println(descripcion);
+        System.out.print("Resultado: ");
+        if (statusCode == 200) {
+            printColor("OK\n", "verde");
         } else {
-            System.out.println("ERROR: falta el título de la página");
+            printColor("ERROR\n", "rojo");
+            System.out.println("Código de estado obtenido: " + statusCode);
         }
+    }
+    public static void pruebaTituloDeLaPagina() throws IOException, InterruptedException 
+    {
+        String descripcion = "Verificar que el título de la página sea Wikipedia:Bienvenidos - Wikipedia, la enciclopedia libre";
+        String titulo = obtenerTituloDeLaPagina("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_b%C3%A1sicas_de_Wikipedia");
+        System.out.println(descripcion);
+        System.out.print("Resultado: ");
+        if (titulo != null && !titulo.isEmpty() && titulo.equals("Wikipedia:Bienvenidos - Wikipedia, la enciclopedia libre")) {
+            printColor("OK\n", "verde");
+            System.out.println("Título obtenido: " + titulo);
+        } else {
+            printColor("ERROR\n", "rojo");
+            System.out.println("Título obtenido: " + titulo);
+        }
+    }
+    public static void pruebaNumeroDeEnlaces() throws IOException, InterruptedException 
+    {
+        String descripcion = "Verificar que la página tenga al menos 100 enlaces";
+        int numeroDeEnlaces = obtenerNumeroDeEnlaces("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_b%C3%A1sicas_de_Wikipedia");
+        System.out.println(descripcion);
+        System.out.print("Resultado: ");
+        if (numeroDeEnlaces > 100) 
+        {
+            printColor("OK\n", "verde");
+            System.out.println("Número de enlaces: " + numeroDeEnlaces);
+        } else 
+        {
+            printColor("ERROR\n", "rojo");
+            System.out.println("Número de enlaces: " + numeroDeEnlaces);
+        }
+    }
 
-        // 7. Buscar número de enlaces (<a>) en la página
-        Pattern linkPattern = Pattern.compile("<a href=\"(.*?)\""); // para enlaces con href
+    public static void pruebaTextoEspecifico() 
+    {
+        String descripcion = "Verificar que la sección 'Normas básicas' contenga el texto 'Los cinco pilares'";
+        String html = obtenerHtml("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_b%C3%A1sicas_de_Wikipedia");
+        System.out.println(descripcion);
+        System.out.print("Resultado: ");
+        if (html.contains("Los cinco pilares")) 
+        {
+            printColor("OK\n", "verde");
+        } else {
+            printColor("ERROR\n", "rojo");
+        }
+    }
+    public static void pruebaElementoPorId() 
+    {
+        String descripcion = "Verificar que la página contenga un elemento con ID 'Normas_básicas_de_Wikipedia'";
+        String html = obtenerHtml("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_b%C3%A1sicas_de_Wikipedia");
+        System.out.println(descripcion);
+        System.out.print("Resultado: ");
+        if (html.contains("id=\"Normas_básicas_de_Wikipedia\"")) {
+            printColor("OK\n", "verde");
+        } else 
+        {
+            printColor("ERROR\n", "rojo");
+        }
+    }
+    public static int obtenerCodigoDeEstado(String url) throws IOException, InterruptedException 
+    {
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.statusCode();
+    }
+    public static String obtenerTituloDeLaPagina(String url) throws IOException, InterruptedException 
+    {
+        String html = obtenerHtml(url);
+        Pattern pattern = Pattern.compile("<title>(.*?)</title>");
+        Matcher matcher = pattern.matcher(html);
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else 
+        {
+            return null;
+        }
+    }
+
+    public static int obtenerNumeroDeEnlaces(String url) throws IOException, InterruptedException 
+    {
+        String html = obtenerHtml(url);
+        Pattern linkPattern = Pattern.compile("<a href=\"(.*?)\"");
         Matcher linkMatcher = linkPattern.matcher(html);
-
         int linkCount = 0;
         while (linkMatcher.find()) 
         {
             linkCount++;
         }
-        System.out.println("El número de enlaces (con href) es: " + linkCount);
-
-        // 8. Buscar texto específico en la sección "Normas básicas"
-        String textoBusqueda = "Los cinco pilares"; // Texto específico de la sección
-        if (html.contains(textoBusqueda)) 
+        return linkCount;
+    }
+    public static String obtenerHtml(String url) 
+    {
+        try 
         {
-            System.out.println("Se encontró el texto: " + textoBusqueda);
-        } else 
+            HttpClient client = HttpClient.newBuilder().build();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body();
+        } catch (IOException | InterruptedException e) 
         {
-            System.out.println("No se encontró el texto: " + textoBusqueda);
+            e.printStackTrace();
+            return ""; // Devuelve una cadena vacía en caso de error
         }
-
-        // 9. Buscar elementos específicos por ID
-        String idElemento = "Normas_básicas_de_Wikipedia"; // ID de la sección 
-        if (html.contains("id=\"" + idElemento + "\"")) 
+    }
+    public static void printColor(String text, String color) 
+    {
+        switch (color) 
         {
-            System.out.println("Se encontró el elemento con ID: " + idElemento);
-        } else 
-        {
-            System.out.println("No se encontró el elemento con ID: " + idElemento);
+            case "rojo":
+                System.out.print("\u001B[31m" + text + "\u001B[0m");
+                break;
+            case "verde":
+                System.out.print("\u001B[32m" + text + "\u001B[0m");
+                break;
+            default:
+                System.out.print(text);
         }
     }
 }

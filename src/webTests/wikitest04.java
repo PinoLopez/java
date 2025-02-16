@@ -8,11 +8,9 @@ import java.net.http.HttpResponse;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class wikitest02 
-{
+public class wikitest04 {
 
-    public static void main(String[] args) throws IOException, InterruptedException 
-    {
+    public static void main(String[] args) throws IOException, InterruptedException {
         pruebaCodigoDeEstado();
         pruebaTituloDeLaPagina();
         pruebaNumeroDeEnlaces();
@@ -20,10 +18,9 @@ public class wikitest02
         pruebaElementoPorId();
     }
 
-    public static void pruebaCodigoDeEstado() throws IOException, InterruptedException 
-    {
-        String descripcion = "Verificar que el código de estado de la página sea 200 (OK)";
-        int statusCode = obtenerCodigoDeEstado("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos");
+    public static void pruebaCodigoDeEstado() throws IOException, InterruptedException {
+        String descripcion = "Verificar que el código de estado de la página sea 200 (éxito)";
+        int statusCode = obtenerCodigoDeEstado("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_sobre_la_calidad");
         System.out.println(descripcion);
         System.out.print("Resultado: ");
         if (statusCode == 200) {
@@ -34,10 +31,9 @@ public class wikitest02
         }
     }
 
-    public static void pruebaTituloDeLaPagina() throws IOException, InterruptedException 
-    {
-        String descripcion = "Verificar que el título de la página sea Wikipedia:Bienvenidos";
-        String titulo = obtenerTituloDeLaPagina("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos");
+    public static void pruebaTituloDeLaPagina() throws IOException, InterruptedException {
+        String descripcion = "Verificar que el título de la página sea Wikipedia:Bienvenidos - Wikipedia, la enciclopedia libre";
+        String titulo = obtenerTituloDeLaPagina("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_sobre_la_calidad");
         System.out.println(descripcion);
         System.out.print("Resultado: ");
         if (titulo != null && !titulo.isEmpty() && titulo.equals("Wikipedia:Bienvenidos - Wikipedia, la enciclopedia libre")) {
@@ -49,14 +45,12 @@ public class wikitest02
         }
     }
 
-    public static void pruebaNumeroDeEnlaces() throws IOException, InterruptedException 
-    {
+    public static void pruebaNumeroDeEnlaces() throws IOException, InterruptedException {
         String descripcion = "Verificar que la página tenga al menos 100 enlaces";
-        int numeroDeEnlaces = obtenerNumeroDeEnlaces("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos");
+        int numeroDeEnlaces = obtenerNumeroDeEnlaces("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_sobre_la_calidad");
         System.out.println(descripcion);
         System.out.print("Resultado: ");
-        if (numeroDeEnlaces > 100) 
-        {
+        if (numeroDeEnlaces > 100) {
             printColor("OK\n", "verde");
             System.out.println("Número de enlaces: " + numeroDeEnlaces);
         } else {
@@ -67,31 +61,32 @@ public class wikitest02
 
     public static void pruebaTextoEspecifico() 
     {
-        String descripcion = "Verificar que la página contenga el texto 'Te damos la bienvenida'";
-        String html = obtenerHtml("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos");
+        String descripcion = "Verificar que la sección 'Normas sobre la calidad' contenga el texto 'reglas básicas indispensables'";
+        String html = obtenerHtml("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_sobre_la_calidad");
         System.out.println(descripcion);
         System.out.print("Resultado: ");
-        if (html.contains("Te damos la bienvenida")) 
+        if (html.contains("reglas básicas indispensables")) 
         {
             printColor("OK\n", "verde");
-        } else {
+        } else 
+        {
             printColor("ERROR\n", "rojo");
         }
     }
 
     public static void pruebaElementoPorId() 
     {
-        String descripcion = "Verificar que la página contenga un elemento con ID 'mw-content-text'";
-        String html = obtenerHtml("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos");
+        String descripcion = "Verificar que la página contenga un elemento con ID 'Normas_sobre_la_calidad'";
+        String html = obtenerHtml("https://es.wikipedia.org/wiki/Wikipedia:Bienvenidos#Normas_sobre_la_calidad");
         System.out.println(descripcion);
         System.out.print("Resultado: ");
-        if (html.contains("id=\"mw-content-text\"")) {
+        if (html.contains("id=\"Normas_sobre_la_calidad\"")) 
+        {
             printColor("OK\n", "verde");
         } else {
             printColor("ERROR\n", "rojo");
         }
     }
-
     public static int obtenerCodigoDeEstado(String url) throws IOException, InterruptedException 
     {
         HttpClient client = HttpClient.newBuilder().build();
@@ -102,19 +97,18 @@ public class wikitest02
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         return response.statusCode();
     }
-
     public static String obtenerTituloDeLaPagina(String url) throws IOException, InterruptedException 
     {
         String html = obtenerHtml(url);
         Pattern pattern = Pattern.compile("<title>(.*?)</title>");
         Matcher matcher = pattern.matcher(html);
-        if (matcher.find()) {
+        if (matcher.find()) 
+        {
             return matcher.group(1);
         } else {
             return null;
         }
     }
-
     public static int obtenerNumeroDeEnlaces(String url) throws IOException, InterruptedException 
     {
         String html = obtenerHtml(url);
@@ -127,10 +121,10 @@ public class wikitest02
         }
         return linkCount;
     }
-
     public static String obtenerHtml(String url) 
     {
-        try {
+        try 
+        {
             HttpClient client = HttpClient.newBuilder().build();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
@@ -138,13 +132,11 @@ public class wikitest02
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return response.body();
-        } catch (IOException | InterruptedException e) 
-        {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return ""; // Devuelve una cadena vacía en caso de error
         }
     }
-
     public static void printColor(String text, String color) 
     {
         switch (color) 
