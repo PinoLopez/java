@@ -3,103 +3,110 @@ package webTests;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class SuiteDePruebas 
-{
+public class SuiteDePruebas {
 
-    public static void main(String[] args) 
-    {
+    public static void main(String[] args) {
         int pruebasRealizadas = 0;
         int pruebasFallidas = 0;
         int pruebasCorrectas = 0;
 
-        try 
-        {
-            // Ejecutar pruebas y capturar resultados y salida
+        try {
+            // Execute tests and capture results and output
             ResultadoPrueba resultado01 = ejecutarPruebas(wikitest01.class);
             ResultadoPrueba resultado02 = ejecutarPruebas(wikitest02.class);
             ResultadoPrueba resultado03 = ejecutarPruebas(wikitest03.class);
             ResultadoPrueba resultado04 = ejecutarPruebas(wikitest04.class);
+            ResultadoPrueba resultado05 = ejecutarPruebas(wikitest05.class); // Add wikitest05
 
-            // Imprimir la salida de cada prueba
+            // Print the output of each test
             System.out.println(resultado01.salida);
             System.out.println(resultado02.salida);
             System.out.println(resultado03.salida);
             System.out.println(resultado04.salida);
+            System.out.println(resultado05.salida); // Print output of wikitest05
 
-            // Sumar resultados
-            pruebasRealizadas = resultado01.pruebasRealizadas + resultado02.pruebasRealizadas + resultado03.pruebasRealizadas + resultado04.pruebasRealizadas;
-            pruebasFallidas = resultado01.pruebasFallidas + resultado02.pruebasFallidas + resultado03.pruebasFallidas + resultado04.pruebasFallidas;
+            // Add up the results
+            pruebasRealizadas = resultado01.pruebasRealizadas + resultado02.pruebasRealizadas + resultado03.pruebasRealizadas + resultado04.pruebasRealizadas + resultado05.pruebasRealizadas;
+            pruebasFallidas = resultado01.pruebasFallidas + resultado02.pruebasFallidas + resultado03.pruebasFallidas + resultado04.pruebasFallidas + resultado05.pruebasFallidas;
             pruebasCorrectas = pruebasRealizadas - pruebasFallidas;
 
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Mostrar resumen de resultados
-        System.out.println("\n--- Resumen de pruebas ---");
-        System.out.println("Pruebas realizadas: " + pruebasRealizadas);
-        System.out.println("Pruebas correctas: " + pruebasCorrectas);
-        System.out.println("Pruebas fallidas: " + pruebasFallidas);
+        // Display results summary
+        System.out.println("\n--- Test Summary ---");
+        System.out.println("Tests executed: " + pruebasRealizadas);
+        System.out.print("Correct tests: ");
+        printColor(pruebasCorrectas + "\n", "green");
+        System.out.print("Failed tests: ");
+        printColor(pruebasFallidas + "\n", "red");
     }
 
-    // Clase para almacenar los resultados y la salida de una prueba
-    static class ResultadoPrueba 
-    {
+    // Class to store the results and output of a test
+    static class ResultadoPrueba {
         int pruebasRealizadas;
         int pruebasFallidas;
         String salida;
 
-        public ResultadoPrueba(int pruebasRealizadas, int pruebasFallidas, String salida) 
-        {
+        public ResultadoPrueba(int pruebasRealizadas, int pruebasFallidas, String salida) {
             this.pruebasRealizadas = pruebasRealizadas;
             this.pruebasFallidas = pruebasFallidas;
             this.salida = salida;
         }
     }
 
-    // Método para ejecutar las pruebas de una clase y capturar los resultados y la salida
-    public static ResultadoPrueba ejecutarPruebas(Class<?> clase) 
-    {
+    // Method to execute the tests of a class and capture the results and output
+    public static ResultadoPrueba ejecutarPruebas(Class<?> clase) {
         int pruebasRealizadas = 0;
         int pruebasFallidas = 0;
         String salida = "";
 
-        try 
-        {
-            // Capturar la salida de la consola
+        try {
+            // Capture console output
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             PrintStream ps = new PrintStream(baos);
             PrintStream originalOut = System.out;
             System.setOut(ps);
 
-            // Ejecutar el método main de la clase de prueba
+            // Execute the main method of the test class
             clase.getMethod("main", String[].class).invoke(null, new Object[] { null });
 
-            // Restaurar la salida de la consola
+            // Restore console output
             System.setOut(originalOut);
 
-            // Obtener la salida y analizarla para contar pruebas
+            // Get the output and analyze it to count tests
             salida = baos.toString();
             pruebasRealizadas = contarPruebasRealizadas(salida);
             pruebasFallidas = contarPruebasFallidas(salida);
 
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return new ResultadoPrueba(pruebasRealizadas, pruebasFallidas, salida);
     }
 
-    // Métodos para contar pruebas (sin cambios)
-    public static int contarPruebasRealizadas(String consola) 
-    {
+    // Methods to count tests (no changes)
+    public static int contarPruebasRealizadas(String consola) {
         return consola.split("Resultado:").length - 1;
     }
 
-    public static int contarPruebasFallidas(String consola) 
-    {
+    public static int contarPruebasFallidas(String consola) {
         return consola.split("ERROR").length - 1;
+    }
+
+    // Method to print text with color
+    public static void printColor(String text, String color) {
+        switch (color) {
+            case "red":
+                System.out.print("\u001B[31m" + text + "\u001B[0m");
+                break;
+            case "green":
+                System.out.print("\u001B[32m" + text + "\u001B[0m");
+                break;
+            default:
+                System.out.print(text);
+        }
     }
 }
