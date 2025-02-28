@@ -3,56 +3,113 @@ package webTests;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class SuiteDePruebas 
-{
+public class SuiteDePruebas {
 
-    public static void main(String[] args) 
-    {
+    // Método para mostrar el resultado de una prueba individual (MOVIDO ARRIBA)
+    public static void mostrarResultadoPrueba(ResultadoPrueba resultado, String nombrePrueba) {
+        System.out.println("\n--- Resultado de " + nombrePrueba + " ---");
+        System.out.println(resultado.salida);
+    }
+
+    public static void main(String[] args) {
         int pruebasRealizadas = 0;
         int pruebasFallidas = 0;
         int pruebasCorrectas = 0;
 
         try {
-            // Execute tests and capture results and output
+            // Ejecutar pruebas y mostrar resultados individuales
             ResultadoPrueba resultado01 = ejecutarPruebas(wikitest01.class);
+            mostrarResultadoPrueba(resultado01, "wikitest01");
+            pruebasRealizadas += resultado01.pruebasRealizadas;
+            pruebasFallidas += resultado01.pruebasFallidas;
+
             ResultadoPrueba resultado02 = ejecutarPruebas(wikitest02.class);
+            mostrarResultadoPrueba(resultado02, "wikitest02");
+            pruebasRealizadas += resultado02.pruebasRealizadas;
+            pruebasFallidas += resultado02.pruebasFallidas;
+
             ResultadoPrueba resultado03 = ejecutarPruebas(wikitest03.class);
+            mostrarResultadoPrueba(resultado03, "wikitest03");
+            pruebasRealizadas += resultado03.pruebasRealizadas;
+            pruebasFallidas += resultado03.pruebasFallidas;
+
             ResultadoPrueba resultado04 = ejecutarPruebas(wikitest04.class);
-            ResultadoPrueba resultado05 = ejecutarPruebas(wikitest05.class); 
-            ResultadoPrueba resultado06 = ejecutarPruebas(wikitest06.class); 
-            ResultadoPrueba resultado07 = ejecutarPruebas(wikitest06.class);
+            mostrarResultadoPrueba(resultado04, "wikitest04");
+            pruebasRealizadas += resultado04.pruebasRealizadas;
+            pruebasFallidas += resultado04.pruebasFallidas;
 
-            // Print the output of each test
-            System.out.println(resultado01.salida); // Print output 
-            System.out.println(resultado02.salida);
-            System.out.println(resultado03.salida);
-            System.out.println(resultado04.salida);
-            System.out.println(resultado05.salida); 
-            System.out.println(resultado06.salida);
-            System.out.println(resultado07.salida);
+            ResultadoPrueba resultado05 = ejecutarPruebas(wikitest05.class);
+            mostrarResultadoPrueba(resultado05, "wikitest05");
+            pruebasRealizadas += resultado05.pruebasRealizadas;
+            pruebasFallidas += resultado05.pruebasFallidas;
 
-            // Add up the results
-            pruebasRealizadas = resultado01.pruebasRealizadas + resultado02.pruebasRealizadas + resultado03.pruebasRealizadas + resultado04.pruebasRealizadas + resultado05.pruebasRealizadas + resultado06.pruebasRealizadas + resultado07.pruebasRealizadas;
-            pruebasFallidas = resultado01.pruebasFallidas + resultado02.pruebasFallidas + resultado03.pruebasFallidas + resultado04.pruebasFallidas + resultado05.pruebasFallidas + resultado06.pruebasFallidas + resultado07.pruebasFallidas;
+            ResultadoPrueba resultado06 = ejecutarPruebas(wikitest06.class);
+            mostrarResultadoPrueba(resultado06, "wikitest06");
+            pruebasRealizadas += resultado06.pruebasRealizadas;
+            pruebasFallidas += resultado06.pruebasFallidas;
+
+            ResultadoPrueba resultado07 = ejecutarPruebas(wikitest07.class);
+            mostrarResultadoPrueba(resultado07, "wikitest07");
+            pruebasRealizadas += resultado07.pruebasRealizadas;
+            pruebasFallidas += resultado07.pruebasFallidas;
+
+            ResultadoPrueba resultado08 = ejecutarPruebas(wikitest08.class);
+            mostrarResultadoPrueba(resultado08, "wikitest08");
+            pruebasRealizadas += resultado08.pruebasRealizadas;
+            pruebasFallidas += resultado08.pruebasFallidas;
+
+            ResultadoPrueba resultado09 = ejecutarPruebas(wikitest09.class);
+            mostrarResultadoPrueba(resultado09, "wikitest09");
+            pruebasRealizadas += resultado09.pruebasRealizadas;
+            pruebasFallidas += resultado09.pruebasFallidas;
+
+            ResultadoPrueba resultado10 = ejecutarPruebas(wikitest10.class);
+            mostrarResultadoPrueba(resultado10, "wikitest10");
+            pruebasRealizadas += resultado10.pruebasRealizadas;
+            pruebasFallidas += resultado10.pruebasFallidas;
+
+            ResultadoPrueba resultado11 = ejecutarPruebas(wikitest11.class);
+            mostrarResultadoPrueba(resultado11, "wikitest11");
+            pruebasRealizadas += resultado11.pruebasRealizadas;
+            pruebasFallidas += resultado11.pruebasFallidas;
+
+            ResultadoPrueba resultado12 = ejecutarPruebas(wikitest12.class);
+            mostrarResultadoPrueba(resultado12, "wikitest12");
+            pruebasRealizadas += resultado12.pruebasRealizadas;
+            pruebasFallidas += resultado12.pruebasFallidas;
+
+            ResultadoPrueba resultado13 = ejecutarPruebas(wikitest13.class);
+            mostrarResultadoPrueba(resultado13, "wikitest13");
+            pruebasRealizadas += resultado13.pruebasRealizadas;
+            pruebasFallidas += resultado13.pruebasFallidas;
+
+            ResultadoPrueba resultado14 = ejecutarPruebas(wikitest14.class);
+            mostrarResultadoPrueba(resultado14, "wikitest14");
+            pruebasRealizadas += resultado14.pruebasRealizadas;
+            pruebasFallidas += resultado14.pruebasFallidas;
+
+            ResultadoPrueba resultado15 = ejecutarPruebas(wikitest15.class);
+            mostrarResultadoPrueba(resultado15, "wikitest15");
+            pruebasRealizadas += resultado15.pruebasRealizadas;
+            pruebasFallidas += resultado15.pruebasFallidas;
+
             pruebasCorrectas = pruebasRealizadas - pruebasFallidas;
 
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Display results summary
-        System.out.println("\n--- Test Summary ---");
-        System.out.println("Tests executed: " + pruebasRealizadas);
-        System.out.print("Correct tests: ");
+        // Mostrar resumen final
+        System.out.println("\n--- Resumen de Pruebas ---");
+        System.out.println("Pruebas ejecutadas: " + pruebasRealizadas);
+        System.out.print("Pruebas correctas: ");
         printColor(pruebasCorrectas + "\n", "green");
-        System.out.print("Failed tests: ");
+        System.out.print("Pruebas fallidas: ");
         printColor(pruebasFallidas + "\n", "red");
     }
 
-    // Class to store the results and output of a test
-    static class ResultadoPrueba 
-    {
+    // Clase para almacenar los resultados y la salida de una prueba
+    static class ResultadoPrueba {
         int pruebasRealizadas;
         int pruebasFallidas;
         String salida;
@@ -63,26 +120,27 @@ public class SuiteDePruebas
             this.salida = salida;
         }
     }
-    // Method to execute the tests of a class and capture the results and output
+
+    // Método para ejecutar las pruebas de una clase y capturar los resultados y la salida
     public static ResultadoPrueba ejecutarPruebas(Class<?> clase) {
         int pruebasRealizadas = 0;
         int pruebasFallidas = 0;
         String salida = "";
 
         try {
-            // Capture console output
+            // Capturar la salida de la consola
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             PrintStream ps = new PrintStream(baos);
             PrintStream originalOut = System.out;
             System.setOut(ps);
 
-            // Execute the main method of the test class
-            clase.getMethod("main", String[].class).invoke(null, new Object[] { null });
+            // Ejecutar el método main de la clase de prueba
+            clase.getMethod("main", String[].class).invoke(null, new Object[]{null});
 
-            // Restore console output
+            // Restaurar la salida de la consola
             System.setOut(originalOut);
 
-            // Get the output and analyze it to count tests
+            // Obtener la salida y analizarla para contar las pruebas
             salida = baos.toString();
             pruebasRealizadas = contarPruebasRealizadas(salida);
             pruebasFallidas = contarPruebasFallidas(salida);
@@ -94,22 +152,18 @@ public class SuiteDePruebas
         return new ResultadoPrueba(pruebasRealizadas, pruebasFallidas, salida);
     }
 
-    // Methods to count tests (no changes)
-    public static int contarPruebasRealizadas(String consola) 
-    {
+    // Métodos para contar pruebas (sin cambios)
+    public static int contarPruebasRealizadas(String consola) {
         return consola.split("Resultado:").length - 1;
     }
 
-    public static int contarPruebasFallidas(String consola) 
-    {
+    public static int contarPruebasFallidas(String consola) {
         return consola.split("ERROR").length - 1;
     }
 
-    // Method to print text with color
-    public static void printColor(String text, String color) 
-    {
-        switch (color) 
-        {
+    // Método para imprimir texto con color
+    public static void printColor(String text, String color) {
+        switch (color) {
             case "red":
                 System.out.print("\u001B[31m" + text + "\u001B[0m");
                 break;
