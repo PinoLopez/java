@@ -48,6 +48,14 @@
       <artifactId>cucumber-junit-platform-engine</artifactId>
       <version>${cucumber.version}</version>
     </dependency>
+    <!-- Cucumber PicoContainer — required for constructor-based DI in Hooks/Steps -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-picocontainer</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+
 
     <!-- JUnit 5 -->
     <dependency>
@@ -168,7 +176,7 @@
                 <param>**/*.json</param>
               </jsonFiles>
               <buildNumber>1</buildNumber>
-              <parallelTesting>false</parallelTesting>
+              
             </configuration>
           </execution>
         </executions>
