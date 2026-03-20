@@ -23,11 +23,16 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Install Chromium
+      - name: Install Chrome (non-snap)
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+        with:
+          chrome-version: stable
+
+      - name: Verify Chrome binary
         run: |
-          sudo apt-get update -q
-          sudo apt-get install -y chromium-browser
-          chromium-browser --version
+          echo "Chrome path: ${{ steps.setup-chrome.outputs.chrome-path }}"
+          ${{ steps.setup-chrome.outputs.chrome-path }} --version
 
       - name: Set up Python 3
         uses: actions/setup-python@v5
@@ -48,16 +53,13 @@ jobs:
         run: |
           mvn verify \
             -Dheadless=true \
-            -Dchromium.binary=chromium-browser \
+            -Dchromium.binary="${{ steps.setup-chrome.outputs.chrome-path }}" \
             -Dmock.server.port=8090 \
             --no-transfer-progress
-        env:
-          DISPLAY: ""
 
       - name: Stop mock server
         if: always()
-        run: |
-          kill $(cat /tmp/mock-server.pid) 2>/dev/null || true
+        run: kill $(cat /tmp/mock-server.pid) 2>/dev/null || true
 
       - name: Prepare Pages content
         if: always()
@@ -65,10 +67,7 @@ jobs:
           mkdir -p gh-pages-content
           if [ -d "cucumber-report/cucumber-html-reports" ]; then
             cp -r cucumber-report/cucumber-html-reports/. gh-pages-content/
-          else
-            echo "<h2>No report generated</h2>" > gh-pages-content/index.html
           fi
-          # Redirect root to overview
           cat > gh-pages-content/index.html << 'EOF'
           <!DOCTYPE html>
           <html>
@@ -77,10 +76,7 @@ jobs:
             <meta http-equiv="refresh" content="0;url=overview-features.html"/>
             <title>CoreSuite Test Report</title>
           </head>
-          <body>
-            <p>Redirecting to
-              <a href="overview-features.html">test report</a>…</p>
-          </body>
+          <body><p>Redirecting to <a href="overview-features.html">test report</a>…</p></body>
           </html>
           EOF
 
