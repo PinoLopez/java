@@ -1,0 +1,25 @@
+# Maven
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+.vscode/
+
+# WebDriverManager cache
+.wdm/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Mock server PID
+/tmp/mock-server.pid
+
+# Keep cucumber-report folder but ignore generated content
+cucumber-report/*
+!cucumber-report/.gitkeep

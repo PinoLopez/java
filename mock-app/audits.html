@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>CoreSuite – Audit Reports</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f8}
+    header{background:#00843D;color:#fff;padding:14px 32px;
+           display:flex;align-items:center;justify-content:space-between}
+    header .brand{font-size:1.2rem;font-weight:700}
+    header .brand span{font-weight:300}
+    nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:.88rem}
+    .page-title{background:#fff;border-bottom:1px solid #ddd;padding:20px 32px}
+    .page-title h2{font-size:1.3rem;color:#00843D;font-weight:700}
+    .page-title p{font-size:.83rem;color:#666;margin-top:4px}
+    .container{padding:28px 32px;max-width:1000px}
+    .section-title{font-size:1rem;font-weight:700;color:#333;margin-bottom:14px}
+    table{width:100%;border-collapse:collapse;background:#fff;
+          border-radius:8px;overflow:hidden;
+          box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    th{background:#00843D;color:#fff;padding:12px 16px;
+       text-align:left;font-size:.83rem}
+    td{padding:11px 16px;font-size:.85rem;border-bottom:1px solid #f0f0f0}
+    tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:3px 10px;border-radius:12px;
+           font-size:.75rem;font-weight:700}
+    .badge.final{background:#d4edda;color:#155724}
+    .badge.draft{background:#e2e3e5;color:#383d41}
+    .badge.review{background:#fff3cd;color:#856404}
+    #new-audit-btn{background:#00843D;color:#fff;border:none;
+                   border-radius:4px;padding:9px 20px;cursor:pointer;
+                   font-weight:600;margin-bottom:20px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">CoreSuite</div>
+  <nav>
+    <a href="dashboard.html">← Dashboard</a>
+    <a href="certification.html">Certification</a>
+    <a href="audits.html">Audits</a>
+  </nav>
+</header>
+<div class="page-title">
+  <h2 id="module-title">Audit Reports</h2>
+  <p>Structured reports for regulatory submission and client delivery</p>
+</div>
+<div class="container">
+  <div class="section-title">Report Archive</div>
+  <button id="new-audit-btn" onclick="alert('New audit form opened')">
+    + New Audit Report
+  </button>
+  <table id="audit-table">
+    <thead>
+      <tr>
+        <th>Report ID</th><th>Client</th><th>Type</th>
+        <th>Lead Auditor</th><th>Date</th><th>Findings</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>AUD-2024-0091</td><td>Seat S.A.</td>
+          <td>Quality system</td><td>Richter, H.</td>
+          <td>2024-03-10</td><td>2 minor</td>
+          <td><span class="badge final">FINAL</span></td></tr>
+      <tr><td>AUD-2024-0090</td><td>Endesa S.A.</td>
+          <td>Environmental</td><td>García, R.</td>
+          <td>2024-03-07</td><td>1 major, 3 minor</td>
+          <td><span class="badge review">IN REVIEW</span></td></tr>
+      <tr><td>AUD-2024-0089</td><td>Mercadona S.A.</td>
+          <td>Food safety</td><td>López, J.</td>
+          <td>2024-03-04</td><td>0</td>
+          <td><span class="badge final">FINAL</span></td></tr>
+      <tr><td>AUD-2024-0088</td><td>Ferrovial S.A.</td>
+          <td>H&amp;S system</td><td>Weber, T.</td>
+          <td>2024-02-28</td><td>Draft</td>
+          <td><span class="badge draft">DRAFT</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

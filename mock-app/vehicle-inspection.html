@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>CoreSuite – Vehicle Inspection</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f8}
+    header{background:#00843D;color:#fff;padding:14px 32px;
+           display:flex;align-items:center;justify-content:space-between}
+    header .brand{font-size:1.2rem;font-weight:700}
+    header .brand span{font-weight:300}
+    nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:.88rem}
+    .page-title{background:#fff;border-bottom:1px solid #ddd;
+                padding:20px 32px}
+    .page-title h2{font-size:1.3rem;color:#00843D;font-weight:700}
+    .page-title p{font-size:.83rem;color:#666;margin-top:4px}
+    .container{padding:28px 32px;max-width:1000px}
+    .search-bar{display:flex;gap:12px;margin-bottom:24px}
+    .search-bar input{flex:1;padding:9px 14px;border:1px solid #ccc;
+                      border-radius:4px;font-size:.9rem}
+    .search-bar button{background:#00843D;color:#fff;border:none;
+                       border-radius:4px;padding:9px 20px;cursor:pointer;
+                       font-weight:600}
+    table{width:100%;border-collapse:collapse;background:#fff;
+          border-radius:8px;overflow:hidden;
+          box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    th{background:#00843D;color:#fff;padding:12px 16px;
+       text-align:left;font-size:.83rem;font-weight:600}
+    td{padding:11px 16px;font-size:.85rem;border-bottom:1px solid #f0f0f0}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:#f9fffe}
+    .badge{display:inline-block;padding:3px 10px;border-radius:12px;
+           font-size:.75rem;font-weight:700}
+    .badge.pass{background:#d4edda;color:#155724}
+    .badge.fail{background:#f8d7da;color:#721c24}
+    .badge.pending{background:#fff3cd;color:#856404}
+    .kpi-row{display:flex;gap:16px;margin-bottom:24px}
+    .kpi{background:#fff;border-radius:8px;padding:18px 22px;flex:1;
+         box-shadow:0 2px 8px rgba(0,0,0,.07);
+         border-left:4px solid #00843D}
+    .kpi .num{font-size:1.8rem;font-weight:700;color:#00843D}
+    .kpi .lbl{font-size:.78rem;color:#666;margin-top:2px}
+    #new-inspection-btn{background:#00843D;color:#fff;border:none;
+                        border-radius:4px;padding:9px 20px;cursor:pointer;
+                        font-weight:600;margin-bottom:20px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">CoreSuite</div>
+  <nav>
+    <a href="dashboard.html">← Dashboard</a>
+    <a href="vehicle-inspection.html">Vehicle</a>
+    <a href="industrial-safety.html">Industrial</a>
+    <a href="environmental.html">Environmental</a>
+  </nav>
+</header>
+<div class="page-title">
+  <h2 id="module-title">Vehicle Inspection Module</h2>
+  <p>Roadworthiness, MOT/ITV and emissions inspection records</p>
+</div>
+<div class="container">
+  <div class="kpi-row">
+    <div class="kpi"><div class="num" id="kpi-total">248</div>
+      <div class="lbl">Total inspections this month</div></div>
+    <div class="kpi"><div class="num" id="kpi-pass">201</div>
+      <div class="lbl">Passed</div></div>
+    <div class="kpi"><div class="num" id="kpi-fail">31</div>
+      <div class="lbl">Failed</div></div>
+    <div class="kpi"><div class="num" id="kpi-pending">16</div>
+      <div class="lbl">Pending review</div></div>
+  </div>
+  <button id="new-inspection-btn" onclick="alert('New inspection form opened')">
+    + New Inspection
+  </button>
+  <div class="search-bar">
+    <input id="search-input" type="text"
+           placeholder="Search by plate number, inspector or station…"/>
+    <button id="search-btn" onclick="filterTable()">Search</button>
+  </div>
+  <table id="inspection-table">
+    <thead>
+      <tr>
+        <th>Inspection ID</th><th>Plate</th><th>Vehicle Type</th>
+        <th>Station</th><th>Inspector</th><th>Date</th><th>Result</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <tr><td>INS-2024-0881</td><td>4782 KLP</td><td>Passenger car</td>
+          <td>MAD-07</td><td>García, R.</td><td>2024-03-18</td>
+          <td><span class="badge pass">PASS</span></td></tr>
+      <tr><td>INS-2024-0880</td><td>9134 BXW</td><td>Light goods</td>
+          <td>BCN-03</td><td>Müller, K.</td><td>2024-03-18</td>
+          <td><span class="badge fail">FAIL</span></td></tr>
+      <tr><td>INS-2024-0879</td><td>2291 TFR</td><td>Motorcycle</td>
+          <td>SEV-02</td><td>López, J.</td><td>2024-03-17</td>
+          <td><span class="badge pass">PASS</span></td></tr>
+      <tr><td>INS-2024-0878</td><td>6673 MNQ</td><td>Heavy goods</td>
+          <td>BIL-01</td><td>Fernández, A.</td><td>2024-03-17</td>
+          <td><span class="badge pending">PENDING</span></td></tr>
+      <tr><td>INS-2024-0877</td><td>1145 ZZA</td><td>Passenger car</td>
+          <td>MAD-07</td><td>García, R.</td><td>2024-03-16</td>
+          <td><span class="badge pass">PASS</span></td></tr>
+    </tbody>
+  </table>
+</div>
+<script>
+function filterTable(){
+  var q=document.getElementById('search-input').value.toLowerCase();
+  var rows=document.querySelectorAll('#table-body tr');
+  rows.forEach(function(r){
+    r.style.display=r.innerText.toLowerCase().includes(q)?'':'none';
+  });
+}
+</script>
+</body>
+</html>

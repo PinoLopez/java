@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>CoreSuite – Environmental Testing</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f8}
+    header{background:#00843D;color:#fff;padding:14px 32px;
+           display:flex;align-items:center;justify-content:space-between}
+    header .brand{font-size:1.2rem;font-weight:700}
+    header .brand span{font-weight:300}
+    nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:.88rem}
+    .page-title{background:#fff;border-bottom:1px solid #ddd;padding:20px 32px}
+    .page-title h2{font-size:1.3rem;color:#00843D;font-weight:700}
+    .page-title p{font-size:.83rem;color:#666;margin-top:4px}
+    .container{padding:28px 32px;max-width:1000px}
+    .section-title{font-size:1rem;font-weight:700;color:#333;margin-bottom:14px}
+    .filter-bar{display:flex;gap:12px;margin-bottom:20px}
+    .filter-bar select,.filter-bar input{padding:8px 12px;
+          border:1px solid #ccc;border-radius:4px;font-size:.88rem}
+    .filter-bar button{background:#00843D;color:#fff;border:none;
+                       border-radius:4px;padding:8px 18px;cursor:pointer;
+                       font-weight:600}
+    table{width:100%;border-collapse:collapse;background:#fff;
+          border-radius:8px;overflow:hidden;
+          box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:28px}
+    th{background:#00843D;color:#fff;padding:12px 16px;
+       text-align:left;font-size:.83rem}
+    td{padding:11px 16px;font-size:.85rem;border-bottom:1px solid #f0f0f0}
+    tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:3px 10px;border-radius:12px;
+           font-size:.75rem;font-weight:700}
+    .badge.compliant{background:#d4edda;color:#155724}
+    .badge.noncomp{background:#f8d7da;color:#721c24}
+    .badge.review{background:#fff3cd;color:#856404}
+    #new-sample-btn{background:#00843D;color:#fff;border:none;
+                    border-radius:4px;padding:9px 20px;cursor:pointer;
+                    font-weight:600;margin-bottom:20px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">CoreSuite</div>
+  <nav>
+    <a href="dashboard.html">← Dashboard</a>
+    <a href="vehicle-inspection.html">Vehicle</a>
+    <a href="industrial-safety.html">Industrial</a>
+    <a href="environmental.html">Environmental</a>
+  </nav>
+</header>
+<div class="page-title">
+  <h2 id="module-title">Environmental Testing Module</h2>
+  <p>Emissions sampling, soil/water analysis and ISO 14001 audit findings</p>
+</div>
+<div class="container">
+  <div class="section-title">Sample Results</div>
+  <div class="filter-bar">
+    <select id="type-filter">
+      <option value="">All types</option>
+      <option value="air">Air emissions</option>
+      <option value="water">Water</option>
+      <option value="soil">Soil</option>
+      <option value="noise">Noise</option>
+    </select>
+    <input id="date-from" type="date"/>
+    <button onclick="alert('Filter applied')">Filter</button>
+  </div>
+  <button id="new-sample-btn" onclick="alert('New sample form opened')">
+    + New Sample
+  </button>
+  <table id="env-table">
+    <thead>
+      <tr>
+        <th>Sample ID</th><th>Site</th><th>Type</th>
+        <th>Parameter</th><th>Result</th><th>Limit</th>
+        <th>Date</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ENV-2024-0441</td><td>Huelva Refinery</td>
+          <td>Air emissions</td><td>SO₂ (mg/Nm³)</td>
+          <td>42</td><td>50</td><td>2024-03-15</td>
+          <td><span class="badge compliant">COMPLIANT</span></td></tr>
+      <tr><td>ENV-2024-0440</td><td>Tarragona Plant</td>
+          <td>Water</td><td>COD (mg/L)</td>
+          <td>138</td><td>125</td><td>2024-03-14</td>
+          <td><span class="badge noncomp">NON-COMPLIANT</span></td></tr>
+      <tr><td>ENV-2024-0439</td><td>Sagunto Port</td>
+          <td>Soil</td><td>Pb (mg/kg)</td>
+          <td>18</td><td>50</td><td>2024-03-13</td>
+          <td><span class="badge compliant">COMPLIANT</span></td></tr>
+      <tr><td>ENV-2024-0438</td><td>Cartagena IZ</td>
+          <td>Noise</td><td>Leq dB(A)</td>
+          <td>68</td><td>65</td><td>2024-03-12</td>
+          <td><span class="badge review">UNDER REVIEW</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

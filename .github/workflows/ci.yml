@@ -1,0 +1,94 @@
+name: CoreSuite Acceptance Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Install Chromium
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y chromium-browser
+          chromium-browser --version
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Start mock server
+        run: |
+          cd mock-app
+          python3 -m http.server 8090 --bind 127.0.0.1 &
+          echo $! > /tmp/mock-server.pid
+          sleep 2
+          curl -sf http://127.0.0.1:8090/index.html > /dev/null \
+            && echo "Mock server OK" \
+            || (echo "Mock server failed to start" && exit 1)
+
+      - name: Run acceptance tests
+        run: |
+          mvn verify \
+            -Dheadless=true \
+            -Dchromium.binary=chromium-browser \
+            -Dmock.server.port=8090 \
+            --no-transfer-progress
+        env:
+          DISPLAY: ""
+
+      - name: Stop mock server
+        if: always()
+        run: |
+          kill $(cat /tmp/mock-server.pid) 2>/dev/null || true
+
+      - name: Prepare Pages content
+        if: always()
+        run: |
+          mkdir -p gh-pages-content
+          if [ -d "cucumber-report/cucumber-html-reports" ]; then
+            cp -r cucumber-report/cucumber-html-reports/. gh-pages-content/
+          else
+            echo "<h2>No report generated</h2>" > gh-pages-content/index.html
+          fi
+          # Redirect root to overview
+          cat > gh-pages-content/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8"/>
+            <meta http-equiv="refresh" content="0;url=overview-features.html"/>
+            <title>CoreSuite Test Report</title>
+          </head>
+          <body>
+            <p>Redirecting to
+              <a href="overview-features.html">test report</a>…</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gh-pages-content
+          publish_branch: gh-pages
+          force_orphan: true
