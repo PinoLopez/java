@@ -2,10 +2,10 @@
 
 > **Java 17 · Maven · Cucumber 7 · Selenium 4 · WebDriverManager · Masterthought**
 
-Automated BDD acceptance test suite for **CoreSuite**, a modern enterprise
-inspection and certification platform replacing a 25-year-old legacy system
-across vehicle roadworthiness, industrial safety and environmental compliance
-domains.
+Automated BDD acceptance test suite for **CoreSuite v1**, a new enterprise
+inspection and certification platform built to replace **Softproject X4 BPMS**,
+a 25-year-old legacy system, across vehicle roadworthiness, industrial safety
+and environmental compliance domains.
 
 All tests were written and executed with **Visual Studio Code** under **Linux Mint**.
 
@@ -24,9 +24,14 @@ All tests were written and executed with **Visual Studio Code** under **Linux Mi
 
 ## 📊 Live Test Report
 
-The Masterthought HTML report is published automatically on every push to `master`:
+The Masterthought HTML report is published automatically on every push to `master`.
+Click any feature or scenario inside the report to expand its full step-by-step outcome:
 
-**👉 [View test report on GitHub Pages](https://pinolopez.github.io/java/)**
+**👉 [View live test report on GitHub Pages](https://pinolopez.github.io/java/)**
+
+The report shows each of the 19 scenarios with pass/fail status, duration,
+step-level detail, and — if a scenario fails — an embedded screenshot taken
+at the exact moment of failure.
 
 ---
 
@@ -34,27 +39,48 @@ The Masterthought HTML report is published automatically on every push to `maste
 
 | Item | Detail |
 |---|---|
-| **Client domain** | Inspection, certification and safety management |
-| **Legacy system age** | ~25 years (end-of-life, scheduled for decommission) |
-| **New platform** | CoreSuite v3 — Java-based, cloud-ready |
+| **Legacy system** | Softproject X4 BPMS — in production for ~25 years |
+| **New platform** | CoreSuite v1 — Java-based, cloud-ready replacement |
+| **Migration window** | 5-year parallel-run and cutover plan |
 | **Testing strategy** | BDD from day one — acceptance tests drive development |
 | **Test scope** | Login, dashboard, 3 inspection domains, certification, audits, admin |
 | **Standards covered** | ISO 9001 · ISO 14001 · ISO 45001 · MOT/ITV · TÜV · ADAC |
 
 ---
 
+## Testing Strategy
+
+The suite is structured to cover all major quality assurance categories
+relevant to an enterprise migration project:
+
+| Type | Description | Covered in this suite |
+|---|---|---|
+| **Smoke – Basic** | Verify the system starts and the main entry point is reachable | Feature 01 — login |
+| **Smoke – Advanced** | Verify all primary modules load and key UI elements are present | Feature 03 — dashboard cards |
+| **End-to-End (E2E)** | Full user journey from login through a module to a result | Features 04, 06, 07, 08, 09 |
+| **Regression** | Re-run after any code change to confirm existing behaviour is unbroken | All 10 features run on every push via CI |
+| **On/Off (boundary)** | Valid input succeeds, invalid input is rejected with a clear error | Feature 02 — valid vs invalid login |
+| **NFR – Performance** | Tests run headless in under 3 minutes end-to-end | Enforced by CI timeout |
+| **NFR – Reliability** | Automatic screenshot on failure for root-cause analysis | Hooks — `@AfterStep` |
+| **NFR – Maintainability** | Page Object Model isolates UI changes to one class per page | All 8 page objects |
+
+---
+
 ## What this project demonstrates
 
-- BDD test structure using Gherkin feature files (English)
-- Page Object Model (POM) — one class per application page
-- `TestContext` for shared WebDriver state across steps and hooks
-- `Hooks` — `@Before` / `@After` / `@AfterStep` with automatic screenshot on failure
-- `HighlightHelper` — elements highlighted with cycling colours during execution
-- WebDriverManager — zero-config ChromeDriver management
-- Python `http.server` as a lightweight mock app server (no extra infrastructure)
-- Masterthought reporting — rich HTML report with feature/scenario breakdown
-- GitHub Actions CI — tests run headless on every push
-- GitHub Pages — report published automatically after each CI run
+- BDD test structure using Gherkin feature files with `Given / When / Then` syntax
+- Page Object Model (POM) — one class per application page, UI selectors centralised
+- `TestContext` — shared WebDriver state injected into every step and hook class
+- `Hooks` — `@Before` / `@After` / `@AfterStep` lifecycle management:
+  - `@Before` — logs the scenario name before it starts
+  - `@AfterStep` — captures a PNG screenshot on step failure and embeds it directly into the Masterthought report (visible at `target/surefire-reports/` and inside the HTML report)
+  - `@After` — quits the browser and logs pass/fail status
+- `HighlightHelper` — applies a coloured background and border to each tested element via JavaScript injection; in headless CI runs no window opens, but the highlight is visible in failure screenshots embedded in the report
+- WebDriverManager — zero-config ChromeDriver management, no manual driver download
+- Python `http.server` — lightweight mock app server, no extra infrastructure needed
+- Masterthought reporting — rich HTML report with feature/scenario/step breakdown, each scenario expandable
+- GitHub Actions CI — all tests run headless on every push in under 3 minutes
+- GitHub Pages — live report updated automatically after each CI run
 
 ---
 
@@ -62,15 +88,24 @@ The Masterthought HTML report is published automatically on every push to `maste
 
 ### Prerequisites
 ```bash
-# Java 17
-java -version
-
-# Maven 3.9+
-mvn -version
-
-# Chromium (headless — no window opens)
-chromium-browser --version
+java -version      # must be 17+
+mvn -version       # must be 3.9+
+python3 --version  # for the mock server
+chromium-browser --version  # or chromium
 ```
+
+### Start the mock app (optional — to preview it manually)
+```bash
+cd mock-app
+python3 -m http.server 8090
+```
+
+Then open **http://localhost:8090** in your browser.
+Login credentials: `inspector` / `suite2024`
+
+This is the simulated CoreSuite v1 interface the tests run against.
+It has 8 screens: Login, Dashboard, Vehicle Inspection, Industrial Safety,
+Environmental Testing, Certification, Audit Reports and Administration.
 
 ### Run all tests
 ```bash
@@ -78,13 +113,13 @@ cd ~/Documents/Java
 mvn verify
 ```
 
-The mock server starts automatically on port 8090, all tests run headless,
+The mock server starts automatically, all 19 scenarios run headless,
 the server stops, and the Masterthought report is generated at:
 ```
 cucumber-report/cucumber-html-reports/overview-features.html
 ```
 
-Open it in your browser:
+Open it:
 ```bash
 xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 ```
@@ -93,18 +128,18 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 
 ## Test scenarios — 10 features, 19 scenarios
 
-| # | Feature file | Module | Scenarios |
+| # | Feature file | Module | What is tested |
 |---|---|---|---|
-| 01 | `01_login_valid.feature` | Login | Valid credentials → dashboard |
-| 02 | `02_login_invalid.feature` | Login | Wrong password + empty fields |
-| 03 | `03_dashboard_modules.feature` | Dashboard | All 6 module cards + navigation |
-| 04 | `04_vehicle_inspection_overview.feature` | Vehicle | KPIs + records table |
-| 05 | `05_vehicle_inspection_search.feature` | Vehicle | Search by plate + button highlight |
-| 06 | `06_industrial_safety_risks.feature` | Industrial | Risk cards + assessment table |
-| 07 | `07_environmental_sampling.feature` | Environmental | Sample results + filter |
-| 08 | `08_certification_management.feature` | Certification | Expiry alert + status badges |
-| 09 | `09_audit_reports.feature` | Audits | Report archive + status badges |
-| 10 | `10_administration_users.feature` | Admin | User table + system settings |
+| 01 | `01_login_valid.feature` | Login | Valid credentials → dashboard reached |
+| 02 | `02_login_invalid.feature` | Login | Wrong password and empty fields → error shown, form stays visible |
+| 03 | `03_dashboard_modules.feature` | Dashboard | All 6 module cards present + navigation link works |
+| 04 | `04_vehicle_inspection_overview.feature` | Vehicle | KPIs (Key Performance Indicators — summary counters for total, passed, failed and pending inspections) visible + records table populated |
+| 05 | `05_vehicle_inspection_search.feature` | Vehicle | Plate number search filters the table; the "New Inspection" button is located and highlighted (background colour applied via JavaScript so it appears in failure screenshots) |
+| 06 | `06_industrial_safety_risks.feature` | Industrial | Risk assessment cards (summary panels grouping hazards by severity — High/Medium/Low) visible with correct risk level labels + assessment table present |
+| 07 | `07_environmental_sampling.feature` | Environmental | Sample results table shows both compliant and non-compliant readings; type filter available |
+| 08 | `08_certification_management.feature` | Certification | Expiry alert banner visible; status badges (coloured labels — ACTIVE / EXPIRING / EXPIRED — indicating certificate lifecycle state) present for all three states |
+| 09 | `09_audit_reports.feature` | Audits | Report archive shows FINAL, IN REVIEW and DRAFT statuses |
+| 10 | `10_administration_users.feature` | Admin | User table lists expected accounts; system settings fields visible |
 
 ---
 
@@ -114,36 +149,48 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                  # CI/CD pipeline → GitHub Pages
-├── mock-app/                       # Static HTML mock of CoreSuite
+├── mock-app/                       # Static HTML mock of CoreSuite v1
 │   ├── index.html                  # Login page
-│   ├── dashboard.html              # Main dashboard
-│   ├── vehicle-inspection.html     # Vehicle module
+│   ├── dashboard.html              # Main dashboard with 6 module cards
+│   ├── vehicle-inspection.html     # Vehicle inspection module
 │   ├── industrial-safety.html      # Industrial safety module
-│   ├── environmental.html          # Environmental module
-│   ├── certification.html          # Certification module
+│   ├── environmental.html          # Environmental testing module
+│   ├── certification.html          # Certification management module
 │   ├── audits.html                 # Audit reports module
-│   └── admin.html                  # Administration module
+│   └── admin.html                  # User and system administration
 ├── src/test/
 │   ├── java/com/wikipedia/tests/
-│   │   ├── pages/                  # Page Object Model classes (1 per page)
+│   │   ├── pages/                  # Page Object Model — 1 class per page
 │   │   ├── runners/
 │   │   │   └── TestRunner.java     # JUnit Platform suite entry point
 │   │   ├── stepdefinitions/
 │   │   │   └── StepDefinitions.java
 │   │   └── support/
-│   │       ├── Hooks.java          # Before / AfterStep / After hooks
-│   │       ├── HighlightHelper.java
-│   │       └── TestContext.java    # Shared WebDriver + base URL
+│   │       ├── Hooks.java          # @Before / @AfterStep / @After lifecycle
+│   │       ├── HighlightHelper.java # JS colour injection for tested elements
+│   │       └── TestContext.java    # Shared WebDriver + base URL + DI root
 │   └── resources/
 │       ├── features/               # 10 Gherkin feature files
 │       └── config/
 │           └── cucumber.properties
-├── cucumber-report/                # Masterthought report (generated)
+├── cucumber-report/                # Masterthought report output (generated)
 └── pom.xml
 ```
 
 ---
 
+## Legacy vs new system
+
+| Aspect | Softproject X4 BPMS (legacy) | CoreSuite v1 (new) |
+|---|---|---|
+| Age | ~25 years | New build |
+| Architecture | Monolithic, on-premise | Modular, cloud-ready |
+| Test coverage | Manual only | BDD from day one |
+| Reporting | None | Masterthought + CI |
+| Browser automation | None | Selenium 4 + Chromium |
+
+---
+
 ## Author
 
-**Juan Pino** — [github.com/PinoLopez](https://github.com/PinoLopez)
+**Juan Pino López** — [github.com/PinoLopez](https://github.com/PinoLopez)
