@@ -34,7 +34,7 @@
     <mock.server.dir>${project.basedir}/mock-app</mock.server.dir>
     <chromium.binary>chromium-browser</chromium.binary>
     <headless>true</headless>
-    <maven.jar.skip>true</maven.jar.skip>
+    
   </properties>
 
   <dependencies>
@@ -105,6 +105,19 @@
         </configuration>
       </plugin>
 
+
+      <!-- Skip JAR creation — this is a test-only project -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
       <!-- 2. Surefire — runs Cucumber via JUnit Platform -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
