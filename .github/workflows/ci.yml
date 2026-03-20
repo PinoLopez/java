@@ -29,23 +29,39 @@ jobs:
         with:
           chrome-version: stable
 
-      - name: Verify Chrome binary
-        run: |
-          echo "Chrome: ${{ steps.setup-chrome.outputs.chrome-path }}"
-          ${{ steps.setup-chrome.outputs.chrome-path }} --version
-
       - name: Set up Python 3
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
+      - name: Start mock server
+        run: |
+          cd mock-app
+          nohup python3 -m http.server 8090 --bind 127.0.0.1 > /tmp/mock-server.log 2>&1 &
+          echo $! > /tmp/mock-server.pid
+          sleep 3
+          curl -sf http://127.0.0.1:8090/index.html > /dev/null \
+            && echo "Mock server OK" \
+            || (echo "Mock server failed:" && cat /tmp/mock-server.log && exit 1)
+
       - name: Run acceptance tests
         run: |
-          mvn verify \
+          mvn test \
             -Dheadless=true \
             -Dchromium.binary="${{ steps.setup-chrome.outputs.chrome-path }}" \
             -Dmock.server.port=8090 \
             --no-transfer-progress
+
+      - name: Generate Masterthought report
+        if: always()
+        run: |
+          mvn masterthought:generate \
+            -Dmasterthought.projectName=CoreSuite \
+            --no-transfer-progress || true
+
+      - name: Stop mock server
+        if: always()
+        run: kill $(cat /tmp/mock-server.pid) 2>/dev/null || true
 
       - name: Prepare Pages content
         if: always()

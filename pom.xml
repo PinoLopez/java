@@ -89,54 +89,25 @@
     </dependency>
   </dependencies>
 
-  <build>
+    <build>
     <plugins>
 
-      <!-- 1. Start Python mock server before tests -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.3.0</version>
-        <executions>
-          <execution>
-            <id>start-mock-server</id>
-            <phase>pre-integration-test</phase>
-            <goals><goal>exec</goal></goals>
-            <configuration>
-              <executable>bash</executable>
-              <arguments>
-                <argument>-c</argument>
-                <argument>
-                  cd ${mock.server.dir} &amp;&amp;
-                  python3 -m http.server ${mock.server.port}
-                  --bind 127.0.0.1 &amp;
-                  echo $! > /tmp/mock-server.pid &amp;&amp;
-                  sleep 2
-                </argument>
-              </arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>stop-mock-server</id>
-            <phase>post-integration-test</phase>
-            <goals><goal>exec</goal></goals>
-            <configuration>
-              <executable>bash</executable>
-              <arguments>
-                <argument>-c</argument>
-                <argument>
-                  kill $(cat /tmp/mock-server.pid) 2>/dev/null || true
-                </argument>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- 2. Maven Failsafe – runs Cucumber via JUnit Platform -->
+      <!-- 1. Compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- 2. Surefire — runs Cucumber via JUnit Platform -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
         <version>3.3.1</version>
         <configuration>
           <includes>
@@ -148,14 +119,6 @@
             <headless>${headless}</headless>
           </systemPropertyVariables>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
       <!-- 3. Masterthought Cucumber Reporting -->
@@ -176,34 +139,11 @@
                 <param>**/*.json</param>
               </jsonFiles>
               <buildNumber>1</buildNumber>
-              
             </configuration>
           </execution>
         </executions>
       </plugin>
 
-      <!-- 4. Compiler -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <source>17</source>
-          <target>17</target>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-
-
-      <!-- Surefire: skip — tests run via Failsafe in integration-test phase -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.3.1</version>
-        <configuration>
-          <skipTests>true</skipTests>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 
