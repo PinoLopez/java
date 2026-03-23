@@ -82,6 +82,7 @@ jobs:
           else
             echo "WARNING: no report found"
           fi
+          cp -r mock-app gh-pages-content/mock-app
           cat > gh-pages-content/index.html << 'EOF'
           <!DOCTYPE html>
           <html>

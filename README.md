@@ -100,18 +100,22 @@ python3 --version  # for the mock server
 chromium-browser --version  # or chromium
 ```
 
-### Start the mock app (optional — to preview it manually)
-```bash
-cd mock-app
-python3 -m http.server 8090
-```
+### Preview the mock app
 
-Then open **http://localhost:8090** in your browser.
-Login credentials: `inspector` / `suite2024`
+**👉 [Open live demo](https://pinolopez.github.io/java/mock-app/)** — no installation needed, works in any browser.
+
+Login credentials are shown directly on the login page: **inspector** / **suite2024**
 
 This is the simulated TechDeck CoreSuite v1 interface the tests run against.
 It has 8 screens: Login, Dashboard, Vehicle Inspection, Industrial Safety,
 Environmental Testing, Certification, Audit Reports and Administration.
+
+> **Developers only — run locally instead:**
+> ```bash
+> cd mock-app
+> python3 -m http.server 8090
+> ```
+> Then open **http://localhost:8090**
 
 ### Run all tests
 ```bash
