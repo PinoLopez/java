@@ -1,62 +1,68 @@
-# TechDeck CoreSuite v1 — Automated BDD Acceptance Tests
+# TechDeck CoreSuite v1 — Automated Acceptance Tests
 
-> **Java 17 · Maven · Cucumber 7 · Selenium 4 · WebDriverManager · Masterthought**  
-> **Replacement of 20+ year old Softproject X4 legacy system** (inspired by real-world enterprise migrations such as DEKRA-style inspection platforms)
+> Java 17 · Maven · Cucumber 7 · Selenium 4 · WebDriverManager · Masterthought
 
-Modern, maintainable, and fully documented test automation suite for **TechDeck CoreSuite v1** — the new Java-based, cloud-ready web application that replaces the outdated Softproject X4 BPMS used for vehicle, industrial safety and environmental certification for more than 20 years.
+Automated acceptance test suite for **TechDeck CoreSuite v1**, the new enterprise inspection and certification platform built to replace the 25-year-old Softproject X4 BPMS legacy system used for vehicle roadworthiness, industrial safety and environmental compliance.
 
-Built and executed on **Linux Mint + Visual Studio Code**. Designed for international teams, stakeholders, recruiters and auditors.
-
-![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven&logoColor=white)
-![Cucumber](https://img.shields.io/badge/Cucumber-7-23D96C?logo=cucumber&logoColor=white)
-![Selenium](https://img.shields.io/badge/Selenium-4-43B02A?logo=selenium&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
-![Linux Mint](https://img.shields.io/badge/Linux%20Mint-21.3-87CF3E?logo=linuxmint&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)
-![CI Status](https://github.com/PinoLopez/java/actions/workflows/ci.yml/badge.svg)
+All tests were written and executed with **Visual Studio Code** under **Linux Mint**.
 
 ---
 
-## 📍 Why This Project Exists (Project Context)
+## Live Test Report
 
-TechDeck is modernising a critical 20+ year old legacy system (Softproject X4) that has been in production since the early 2000s.  
-The new CoreSuite v1 is a clean Java/Spring web app with far better UX, scalability and compliance.
-
-**This test suite proves** that the migration can be done safely, quickly and with full traceability — exactly what big enterprises (DEKRA-style) demand.
-
-| Item                  | Detail |
-|-----------------------|--------|
-| Legacy system         | Softproject X4 BPMS — 20+ years in production |
-| New platform          | TechDeck CoreSuite v1 — modern Java web app |
-| Migration goal        | Zero-downtime parallel run + full cutover |
-| Testing approach      | BDD from day 1 — acceptance tests drive development |
-| Standards & compliance| ISO 9001/14001/45001, TÜV, ADAC, DSGVO, OWASP, BITV/WCAG |
+The Masterthought HTML report is published automatically on every push to `master`.  
+**View live test report** → [GitHub Pages](https://pinolopez.github.io/java/)
 
 ---
 
 ## 📚 Documentation
 
-- **[TEST-STRATEGY-TechDeck.md](docs/TEST-STRATEGY-TechDeck.md)** – Full testing strategy, why each test type exists, how it is implemented, when it is executed  
-- **[TEST-PLAN-TechDeck.md](docs/TEST-PLAN-TechDeck.md)** – Detailed test plan with all categories (Smoke, E2E, Regression, On/Off Docker, NFR, mandatory tests, etc.)
-
-**Live Masterthought Report** → [GitHub Pages](https://pinolopez.github.io/java/) (auto-updated after every push)
+- **[TEST-STRATEGY-TechDeck.md](docs/TEST-STRATEGY-TechDeck.md)** – Why we test this way, how, and when
+- **[TEST-PLAN-TechDeck.md](docs/TEST-PLAN-TechDeck.md)** – Full test categories, execution plan and status
 
 ---
 
-## 🧪 Test Coverage Overview
+## Project Context
 
-10 feature files | 19 scenarios covering:
-- Login (valid + invalid)
-- Dashboard + all 6 modules
-- Vehicle Inspection, Industrial Safety, Environmental, Certification, Audits, Administration
-
-All tests run against a lightweight HTML mock (no real backend needed locally).
+| Item                  | Detail |
+|-----------------------|--------|
+| Legacy system         | Softproject X4 BPMS — in production for ~25 years |
+| New platform          | TechDeck CoreSuite v1 — modern Java-based replacement |
+| Migration window      | 5-year parallel-run and safe cutover |
+| Testing approach      | We write tests in simple plain-English sentences (anyone can read “Given… When… Then…” without knowing technical terms) so business teams and developers stay perfectly aligned |
+| Test scope            | Login, dashboard, all inspection modules, certification, audits, admin |
+| Standards covered     | ISO 9001 · ISO 14001 · ISO 45001 · TÜV · ADAC · DSGVO |
 
 ---
 
-## 🚀 Running Locally (Linux Mint)
+## Testing Strategy Overview
+
+Full details are in the docs files above. Quick view of the main categories covered in this repository:
+
+| Type                    | What it checks                                      | Covered here |
+|-------------------------|-----------------------------------------------------|--------------|
+| Smoke – Basic           | System starts and login works                       | ✅ Feature 01 |
+| Smoke – Advanced        | All dashboard modules load                          | ✅ Feature 03 |
+| End-to-End              | Complete user journeys                              | ✅ Features 04–09 |
+| Regression              | Nothing broke after changes                         | ✅ All 10 features on every push |
+| On/Off Docker           | Environment can start and stop cleanly              | 🟡 To be implemented |
+| NFR                     | Speed, screenshots, clean code                      | ✅ Built-in |
+| Always mandatory        | Integration, API, Security, Usability, Compliance, Smoke-in-Production | 🟡 Planned in release gates |
+
+---
+
+## What this project demonstrates
+
+- Tests written in simple English (no jargon) so everyone understands
+- Page Object Model (all UI selectors in one place)
+- Shared browser handling, automatic screenshots on failure, coloured highlights on tested elements
+- Zero-config ChromeDriver + lightweight HTML mock app
+- Rich HTML report + GitHub Actions CI that finishes in under 3 minutes
+
+---
+
+## Running the tests locally
 
 ```bash
-cd /home/agropecuario/Documents/Java
+cd ~/Documents/Java
 mvn verify
