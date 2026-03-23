@@ -4,8 +4,8 @@
 This document explains **why** we test the way we do, **how** each layer is implemented, and **when** each test type is executed.  
 Target audience: international QA teams, architects, auditors, stakeholders.
 
-## 1. Overall Testing Pyramid & Why BDD
-We follow the industry-standard pyramid + BDD (Gherkin) because:
+## 1. Overall Testing Pyramid & Why BDD (Behaviour-Driven Development)
+We follow the industry-standard pyramid + BDD (behaviour-driven, plain-English test scripts) because:
 - Business & IT speak the same language
 - Tests are living documentation
 - Changes in UI only affect Page Objects → very maintainable
