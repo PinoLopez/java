@@ -1,196 +1,62 @@
-# CoreSuite — Automated Acceptance Tests
+# TechDeck CoreSuite v1 — Automated BDD Acceptance Tests
 
-> **Java 17 · Maven · Cucumber 7 · Selenium 4 · WebDriverManager · Masterthought**
+> **Java 17 · Maven · Cucumber 7 · Selenium 4 · WebDriverManager · Masterthought**  
+> **Replacement of 20+ year old Softproject X4 legacy system** (inspired by real-world enterprise migrations such as DEKRA-style inspection platforms)
 
-Automated BDD acceptance test suite for **CoreSuite v1**, a new enterprise
-inspection and certification platform built to replace **Softproject X4 BPMS**,
-a 25-year-old legacy system, across vehicle roadworthiness, industrial safety
-and environmental compliance domains.
+Modern, maintainable, and fully documented test automation suite for **TechDeck CoreSuite v1** — the new Java-based, cloud-ready web application that replaces the outdated Softproject X4 BPMS used for vehicle, industrial safety and environmental certification for more than 20 years.
 
-All tests were written and executed with **Visual Studio Code** under **Linux Mint**.
-
----
+Built and executed on **Linux Mint + Visual Studio Code**. Designed for international teams, stakeholders, recruiters and auditors.
 
 ![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven&logoColor=white)
 ![Cucumber](https://img.shields.io/badge/Cucumber-7-23D96C?logo=cucumber&logoColor=white)
 ![Selenium](https://img.shields.io/badge/Selenium-4-43B02A?logo=selenium&logoColor=white)
-![Chromium](https://img.shields.io/badge/Chromium-headless-4285F4?logo=googlechrome&logoColor=white)
-![Linux Mint](https://img.shields.io/badge/Linux%20Mint-21.2-87CF3E?logo=linuxmint&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS%20Code-editor-007ACC?logo=visualstudiocode&logoColor=white)
-![CI](https://github.com/PinoLopez/java/actions/workflows/ci.yml/badge.svg)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
+![Linux Mint](https://img.shields.io/badge/Linux%20Mint-21.3-87CF3E?logo=linuxmint&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)
+![CI Status](https://github.com/PinoLopez/java/actions/workflows/ci.yml/badge.svg)
 
 ---
 
-## 📊 Live Test Report
+## 📍 Why This Project Exists (Project Context)
 
-The Masterthought HTML report is published automatically on every push to `master`.
-Click any feature or scenario inside the report to expand its full step-by-step outcome:
+TechDeck is modernising a critical 20+ year old legacy system (Softproject X4) that has been in production since the early 2000s.  
+The new CoreSuite v1 is a clean Java/Spring web app with far better UX, scalability and compliance.
 
-**👉 [View live test report on GitHub Pages](https://pinolopez.github.io/java/)**
+**This test suite proves** that the migration can be done safely, quickly and with full traceability — exactly what big enterprises (DEKRA-style) demand.
 
-The report shows each of the 19 scenarios with pass/fail status, duration,
-step-level detail, and — if a scenario fails — an embedded screenshot taken
-at the exact moment of failure.
-
----
-
-## Project Context
-
-| Item | Detail |
-|---|---|
-| **Legacy system** | Softproject X4 BPMS — in production for ~25 years |
-| **New platform** | CoreSuite v1 — Java-based, cloud-ready replacement |
-| **Migration window** | 5-year parallel-run and cutover plan |
-| **Testing strategy** | BDD from day one — acceptance tests drive development |
-| **Test scope** | Login, dashboard, 3 inspection domains, certification, audits, admin |
-| **Standards covered** | ISO 9001 · ISO 14001 · ISO 45001 · MOT/ITV · TÜV · ADAC |
+| Item                  | Detail |
+|-----------------------|--------|
+| Legacy system         | Softproject X4 BPMS — 20+ years in production |
+| New platform          | TechDeck CoreSuite v1 — modern Java web app |
+| Migration goal        | Zero-downtime parallel run + full cutover |
+| Testing approach      | BDD from day 1 — acceptance tests drive development |
+| Standards & compliance| ISO 9001/14001/45001, TÜV, ADAC, DSGVO, OWASP, BITV/WCAG |
 
 ---
 
-## Testing Strategy
+## 📚 Documentation
 
-The suite is structured to cover all major quality assurance categories
-relevant to an enterprise migration project:
+- **[TEST-STRATEGY-TechDeck.md](docs/TEST-STRATEGY-TechDeck.md)** – Full testing strategy, why each test type exists, how it is implemented, when it is executed  
+- **[TEST-PLAN-TechDeck.md](docs/TEST-PLAN-TechDeck.md)** – Detailed test plan with all categories (Smoke, E2E, Regression, On/Off Docker, NFR, mandatory tests, etc.)
 
-| Type | Description | Covered in this suite |
-|---|---|---|
-| **Smoke – Basic** | Verify the system starts and the main entry point is reachable | Feature 01 — login |
-| **Smoke – Advanced** | Verify all primary modules load and key UI elements are present | Feature 03 — dashboard cards |
-| **End-to-End (E2E)** | Full user journey from login through a module to a result | Features 04, 06, 07, 08, 09 |
-| **Regression** | Re-run after any code change to confirm existing behaviour is unbroken | All 10 features run on every push via CI |
-| **On/Off (boundary)** | Valid input succeeds, invalid input is rejected with a clear error | Feature 02 — valid vs invalid login |
-| **NFR – Performance** | Tests run headless in under 3 minutes end-to-end | Enforced by CI timeout |
-| **NFR – Reliability** | Automatic screenshot on failure for root-cause analysis | Hooks — `@AfterStep` |
-| **NFR – Maintainability** | Page Object Model isolates UI changes to one class per page | All 8 page objects |
+**Live Masterthought Report** → [GitHub Pages](https://pinolopez.github.io/java/) (auto-updated after every push)
 
 ---
 
-## What this project demonstrates
+## 🧪 Test Coverage Overview
 
-- BDD test structure using Gherkin feature files with `Given / When / Then` syntax
-- Page Object Model (POM) — one class per application page, UI selectors centralised
-- `TestContext` — shared WebDriver state injected into every step and hook class
-- `Hooks` — `@Before` / `@After` / `@AfterStep` lifecycle management:
-  - `@Before` — logs the scenario name before it starts
-  - `@AfterStep` — captures a PNG screenshot on step failure and embeds it directly into the Masterthought report (visible at `target/surefire-reports/` and inside the HTML report)
-  - `@After` — quits the browser and logs pass/fail status
-- `HighlightHelper` — applies a coloured background and border to each tested element via JavaScript injection; in headless CI runs no window opens, but the highlight is visible in failure screenshots embedded in the report
-- WebDriverManager — zero-config ChromeDriver management, no manual driver download
-- Python `http.server` — lightweight mock app server, no extra infrastructure needed
-- Masterthought reporting — rich HTML report with feature/scenario/step breakdown, each scenario expandable
-- GitHub Actions CI — all tests run headless on every push in under 3 minutes
-- GitHub Pages — live report updated automatically after each CI run
+10 feature files | 19 scenarios covering:
+- Login (valid + invalid)
+- Dashboard + all 6 modules
+- Vehicle Inspection, Industrial Safety, Environmental, Certification, Audits, Administration
+
+All tests run against a lightweight HTML mock (no real backend needed locally).
 
 ---
 
-## Running the tests locally
+## 🚀 Running Locally (Linux Mint)
 
-### Prerequisites
 ```bash
-java -version      # must be 17+
-mvn -version       # must be 3.9+
-python3 --version  # for the mock server
-chromium-browser --version  # or chromium
-```
-
-### Start the mock app (optional — to preview it manually)
-```bash
-cd mock-app
-python3 -m http.server 8090
-```
-
-Then open **http://localhost:8090** in your browser.
-Login credentials: `inspector` / `suite2024`
-
-This is the simulated CoreSuite v1 interface the tests run against.
-It has 8 screens: Login, Dashboard, Vehicle Inspection, Industrial Safety,
-Environmental Testing, Certification, Audit Reports and Administration.
-
-### Run all tests
-```bash
-cd ~/Documents/Java
+cd /home/agropecuario/Documents/Java
 mvn verify
-```
-
-The mock server starts automatically, all 19 scenarios run headless,
-the server stops, and the Masterthought report is generated at:
-```
-cucumber-report/cucumber-html-reports/overview-features.html
-```
-
-Open it:
-```bash
-xdg-open cucumber-report/cucumber-html-reports/overview-features.html
-```
-
----
-
-## Test scenarios — 10 features, 19 scenarios
-
-| # | Feature file | Module | What is tested |
-|---|---|---|---|
-| 01 | `01_login_valid.feature` | Login | Valid credentials → dashboard reached |
-| 02 | `02_login_invalid.feature` | Login | Wrong password and empty fields → error shown, form stays visible |
-| 03 | `03_dashboard_modules.feature` | Dashboard | All 6 module cards present + navigation link works |
-| 04 | `04_vehicle_inspection_overview.feature` | Vehicle | KPIs (Key Performance Indicators — summary counters for total, passed, failed and pending inspections) visible + records table populated |
-| 05 | `05_vehicle_inspection_search.feature` | Vehicle | Plate number search filters the table; the "New Inspection" button is located and highlighted (background colour applied via JavaScript so it appears in failure screenshots) |
-| 06 | `06_industrial_safety_risks.feature` | Industrial | Risk assessment cards (summary panels grouping hazards by severity — High/Medium/Low) visible with correct risk level labels + assessment table present |
-| 07 | `07_environmental_sampling.feature` | Environmental | Sample results table shows both compliant and non-compliant readings; type filter available |
-| 08 | `08_certification_management.feature` | Certification | Expiry alert banner visible; status badges (coloured labels — ACTIVE / EXPIRING / EXPIRED — indicating certificate lifecycle state) present for all three states |
-| 09 | `09_audit_reports.feature` | Audits | Report archive shows FINAL, IN REVIEW and DRAFT statuses |
-| 10 | `10_administration_users.feature` | Admin | User table lists expected accounts; system settings fields visible |
-
----
-
-## Project structure
-```
-.
-├── .github/
-│   └── workflows/
-│       └── ci.yml                  # CI/CD pipeline → GitHub Pages
-├── mock-app/                       # Static HTML mock of CoreSuite v1
-│   ├── index.html                  # Login page
-│   ├── dashboard.html              # Main dashboard with 6 module cards
-│   ├── vehicle-inspection.html     # Vehicle inspection module
-│   ├── industrial-safety.html      # Industrial safety module
-│   ├── environmental.html          # Environmental testing module
-│   ├── certification.html          # Certification management module
-│   ├── audits.html                 # Audit reports module
-│   └── admin.html                  # User and system administration
-├── src/test/
-│   ├── java/com/wikipedia/tests/
-│   │   ├── pages/                  # Page Object Model — 1 class per page
-│   │   ├── runners/
-│   │   │   └── TestRunner.java     # JUnit Platform suite entry point
-│   │   ├── stepdefinitions/
-│   │   │   └── StepDefinitions.java
-│   │   └── support/
-│   │       ├── Hooks.java          # @Before / @AfterStep / @After lifecycle
-│   │       ├── HighlightHelper.java # JS colour injection for tested elements
-│   │       └── TestContext.java    # Shared WebDriver + base URL + DI root
-│   └── resources/
-│       ├── features/               # 10 Gherkin feature files
-│       └── config/
-│           └── cucumber.properties
-├── cucumber-report/                # Masterthought report output (generated)
-└── pom.xml
-```
-
----
-
-## Legacy vs new system
-
-| Aspect | Softproject X4 BPMS (legacy) | CoreSuite v1 (new) |
-|---|---|---|
-| Age | ~25 years | New build |
-| Architecture | Monolithic, on-premise | Modular, cloud-ready |
-| Test coverage | Manual only | BDD from day one |
-| Reporting | None | Masterthought + CI |
-| Browser automation | None | Selenium 4 + Chromium |
-
----
-
-## Author
-
-**Juan Pino López** — [github.com/PinoLopez](https://github.com/PinoLopez)
