@@ -2,7 +2,7 @@
 
 **Purpose**  
 This document explains **why** we test the way we do, **how** each layer is implemented, and **when** each test type is executed.  
-Target audience: international QA teams, architects, auditors, recruiters, stakeholders.
+Target audience: international QA teams, architects, auditors, stakeholders.
 
 ## 1. Overall Testing Pyramid & Why BDD
 We follow the industry-standard pyramid + BDD (Gherkin) because:
