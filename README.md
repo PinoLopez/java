@@ -1,8 +1,7 @@
 # TechDeck CoreSuite v1 — Automated Acceptance Tests
 
-> **Java 17 · Maven · Cucumber 7 · Selenium 4 · WebDriverManager · Masterthought**
 
-Automated BDD acceptance test suite for **TechDeck CoreSuite v1**, the new enterprise
+Automated BDD (behaviour-driven, plain-English test scripts) acceptance test suite for **TechDeck CoreSuite v1**, the new enterprise
 inspection and certification platform built to replace **Softproject X4 BPMS**,
 a 25-year-old legacy system, across vehicle roadworthiness, industrial safety
 and environmental compliance domains.
@@ -50,7 +49,7 @@ at the exact moment of failure.
 | **Legacy system** | Softproject X4 BPMS — in production for ~25 years |
 | **New platform** | TechDeck CoreSuite v1 — Java-based, cloud-ready replacement |
 | **Migration window** | 5-year parallel-run and cutover plan |
-| **Testing strategy** | BDD from day one — acceptance tests drive development |
+| **Testing strategy** | BDD (behaviour-driven, plain-English test scripts) from day one — acceptance tests drive development |
 | **Test scope** | Login, dashboard, 3 inspection domains, certification, audits, admin |
 | **Standards covered** | ISO 9001 · ISO 14001 · ISO 45001 · TÜV · ADAC · DSGVO |
 
@@ -75,7 +74,7 @@ relevant to an enterprise migration project:
 
 ## What this project demonstrates
 
-- BDD test structure using Gherkin feature files with `Given / When / Then` syntax
+- BDD (behaviour-driven, plain-English test scripts) structure using Gherkin feature files with `Given / When / Then` syntax
 - Page Object Model (POM) — one class per application page, UI selectors centralised
 - `TestContext` — shared WebDriver state injected into every step and hook class
 - `Hooks` — `@Before` / `@After` / `@AfterStep` lifecycle management:
