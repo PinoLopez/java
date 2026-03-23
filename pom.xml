@@ -32,6 +32,7 @@
     <!-- runtime config -->
     <mock.server.port>8090</mock.server.port>
     <mock.server.dir>${project.basedir}/mock-app</mock.server.dir>
+    <skip.mock.server>false</skip.mock.server>
     <chromium.binary>chromium-browser</chromium.binary>
     <headless>true</headless>
     
@@ -196,6 +197,7 @@
                 <argument>127.0.0.1</argument>
               </arguments>
               <workingDirectory>${mock.server.dir}</workingDirectory>
+              <skip>${skip.mock.server}</skip>
               <async>true</async>
               <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
             </configuration>

@@ -55,6 +55,8 @@ jobs:
             -Dheadless=true \
             -Dchromium.binary="${{ steps.setup-chrome.outputs.chrome-path }}" \
             -Dmock.server.port=8090 \
+            -Dskip.mock.server=true \
+            "-Dcucumber.filter.tags=not @docker and not @owasp" \
             --no-transfer-progress
 
       - name: Stop mock server

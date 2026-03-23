@@ -48,6 +48,12 @@ public class NfrSecurityStepDefinitions {
         zapExitCode = p.waitFor();
         System.out.println("ZAP exit code: " + zapExitCode);
         System.out.println("ZAP output:\n" + zapOutput);
+        // Remove ZAP image after scan to recover disk space
+        try {
+            new ProcessBuilder("docker", "rmi", "ghcr.io/zaproxy/zaproxy:stable")
+                .redirectErrorStream(true).start().waitFor();
+            System.out.println("ZAP image removed from local Docker cache.");
+        } catch (Exception ignored) {}
     }
 
     @Then("the scan completes without high-risk alerts")
