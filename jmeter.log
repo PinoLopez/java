@@ -1,0 +1,12 @@
+2026/03/23 20:13:46 INFO  - jmeter.util.JMeterUtils: Setting Locale to en_US 
+2026/03/23 20:13:46 INFO  - jmeter.JMeter: Loading user properties from: /usr/share/jmeter/bin/user.properties 
+2026/03/23 20:13:46 INFO  - jmeter.JMeter: Loading system properties from: /usr/share/jmeter/bin/system.properties 
+2026/03/23 20:13:46 FATAL - jmeter.JMeter: An error occurred:  java.lang.IllegalArgumentException: Unknown arg: /tmp/coresuite-load-7016020360086990276.jmx
+	at org.apache.jmeter.JMeter.initializeProperties(JMeter.java:608)
+	at org.apache.jmeter.JMeter.start(JMeter.java:298)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:264)
+

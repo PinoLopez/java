@@ -1,0 +1,16 @@
+services:
+  mock-app:
+    image: python:3.11-alpine
+    container_name: coresuite-mock
+    working_dir: /app
+    volumes:
+      - ./mock-app:/app
+    command: python3 -m http.server 8091 --bind 0.0.0.0
+    ports:
+      - "8091:8091"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8091/index.html"]
+      interval: 5s
+      timeout: 3s
+      retries: 6
+      start_period: 5s

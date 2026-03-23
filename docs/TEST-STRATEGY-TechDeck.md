@@ -34,18 +34,18 @@ We follow the industry-standard pyramid + BDD (behaviour-driven, plain-English t
 
 ### On/Off Tests (Docker)
 **Why**: Verify the whole environment can be started and cleanly stopped (critical for cloud/DevOps).  
-**How**: Docker Compose up/down + health-check tests + cleanup.  
+**How**: Docker Compose up/down + health-check tests + cleanup (Feature 15 — DockerStepDefinitions.java).  
 **When**: During deployment pipeline and environment switch tests.
 
 ### Non-Functional Requirements (NFR)
 - **Performance** – total run < 3 min, measured in CI  
 - **Reliability** – screenshot + embed on every failure  
 - **Maintainability** – strict Page Object Model + clear naming  
-- **Load/Stress** – planned with JMeter (not yet in this suite)  
-- **Security (OWASP)** – static + dynamic scans in pipeline (planned)  
-- **Accessibility (BITV/WCAG)** – axe-core integration planned  
+- **Load/Stress** – JMeter 2.13 via ProcessBuilder, JMX generated at runtime (Feature 16)  
+- **Security (OWASP)** – OWASP ZAP baseline scan via Docker, exit code < 2 = pass (Feature 17)  
+- **Accessibility (BITV/WCAG)** – axe-core 4.10.1 via AxeBuilder.analyze(), violations reported per page (Feature 18)  
 - **Scalability** – container resource limits tested  
-- **DSGVO compliance** – data masking & consent checks in future scenarios
+- **DSGVO compliance** – page source credential checks, password field inspection, email input audit (Feature 19)
 
 ### Always Mandatory Tests (TechDeck standard)
 The following are **never skipped** in any release:

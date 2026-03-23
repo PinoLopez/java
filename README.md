@@ -66,9 +66,9 @@ relevant to an enterprise migration project:
 | **Smoke – Advanced** | Verify all primary modules load and key UI elements are present | Feature 03 — dashboard cards |
 | **End-to-End (E2E)** | Full user journey from login through a module to a result | Features 04, 06, 07, 08, 09 |
 | **Regression** | Re-run after any code change to confirm existing behaviour is unbroken | All 10 features run on every push via CI |
-| **On/Off (Docker)** | Full environment starts cleanly, health checks pass, stops and removes all containers and volumes without leaving orphans | Docker Compose pipeline — planned |
-| **NFR** | Checks that the app is fast, stable, secure and easy to use — non-functional focused | CI timeout · Hooks · Page Object Model |
-| **Always mandatory** | Integration, API, Security, Usability, Compliance, Smoke-in-Production | Planned in release gates |
+| **On/Off (Docker)** | Full environment starts cleanly, health checks pass, stops and removes all containers and volumes without leaving orphans | Feature 15 — Docker Compose lifecycle |
+| **NFR** | Checks that the app is fast, stable, secure and easy to use — non-functional focused | Features 16–19 — JMeter · ZAP · axe-core · DSGVO · CI timeout · Hooks · POM |
+| **Always mandatory** | Integration, API, Security, Usability, Compliance, Smoke-in-Production | Feature 20 — HTTP contract checks + smoke-in-production |
 
 ---
 
@@ -136,7 +136,7 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 
 ---
 
-## Test scenarios — 10 features, 19 scenarios
+## Test scenarios — 20 features, 46 scenarios
 
 | # | Feature file | Module | What is tested |
 |---|---|---|---|
@@ -150,6 +150,16 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 | 08 | `08_certification_management.feature` | Certification | Expiry alert banner visible; status badges (coloured labels — ACTIVE / EXPIRING / EXPIRED — indicating certificate lifecycle state) present for all three states |
 | 09 | `09_audit_reports.feature` | Audits | Report archive shows FINAL, IN REVIEW and DRAFT statuses |
 | 10 | `10_administration_users.feature` | Admin | User table lists expected accounts; system settings fields visible |
+| 11 | `11_smoke_basic_health.feature` | Health | HTTP 200 check on login and dashboard endpoints — no browser required |
+| 12 | `12_smoke_advanced_navigation.feature` | All modules | Every module navigated by URL — page title verified |
+| 13 | `13_e2e_vehicle_full_journey.feature` | Vehicle | Full journey: login → dashboard → module card → vehicle search |
+| 14 | `14_regression_critical_paths.feature` | Cross-module | Login, dashboard cards, certification alert, audit status re-verified after any change |
+| 15 | `15_docker_onoff.feature` | Infrastructure | Docker Compose up → health check → down → cleanup — repeated 3× |
+| 16 | `16_nfr_performance.feature` | NFR | JMeter: 10 concurrent users, average response < 1000 ms, error rate < 1% |
+| 17 | `17_nfr_security_owasp.feature` | NFR | OWASP ZAP baseline passive scan — zero high-risk alerts |
+| 18 | `18_nfr_accessibility_wcag.feature` | NFR | axe-core WCAG 2.1 checks on login, dashboard and vehicle inspection pages |
+| 19 | `19_nfr_dsgvo.feature` | NFR | DSGVO: no hardcoded credentials or SSN patterns, no plaintext passwords or email inputs |
+| 20 | `20_mandatory_integration_api.feature` | Mandatory | HTTP contract checks on 4 endpoints + smoke-in-production login verification |
 
 ---
 

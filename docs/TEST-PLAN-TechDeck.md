@@ -17,8 +17,8 @@ every functional and non-functional requirement before and during migration.
 | Regression              | Full suite                                                                                            | Covered         | Every push              | CI Pipeline     |
 | On/Off (Infrastructure) | Docker Compose up/down — environment starts, health checks pass, stops and removes all containers and volumes cleanly | Planned | Deployment pipeline | DevOps + QA |
 | NFR                     | Performance / Reliability / Maintainability                                                           | Covered         | CI + Monitoring         | Automation      |
-| NFR                     | Load/Stress, Security (OWASP), Accessibility (BITV/WCAG), Scalability, DSGVO                         | Planned         | Separate pipeline       | QA + Security   |
-| Mandatory (never skipped) | Integration, API, Security, Usability, Compliance, Smoke-in-Production                             | Planned         | Release gate            | All teams       |
+| NFR                     | Load/Stress (JMeter), Security (OWASP ZAP), Accessibility (axe-core/BITV/WCAG), DSGVO                | Covered         | On demand + CI gate     | QA + Security   |
+| Mandatory (never skipped) | Integration, API, Security, Usability, Compliance, Smoke-in-Production                             | Covered         | Release gate + every push | All teams     |
 
 ## On/Off Infrastructure Tests (to be implemented)
 
