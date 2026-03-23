@@ -22,4 +22,6 @@ Thumbs.db
 
 # Keep cucumber-report folder but ignore generated content
 cucumber-report/*
-!cucumber-report/.gitkeep
+!cucumber-report/.gitkeepjmeter.log
+*.jtl
+*.jmx
