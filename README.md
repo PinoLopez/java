@@ -163,6 +163,7 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                  # CI/CD pipeline → GitHub Pages
+├── docker-compose.yml              # Docker On/Off test environment
 ├── mock-app/                       # Static HTML mock of TechDeck CoreSuite v1
 │   ├── index.html                  # Login page
 │   ├── dashboard.html              # Main dashboard with 6 module cards
@@ -199,7 +200,7 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 |---|---|---|
 | Age | ~25 years | New build |
 | Architecture | XML-based, on-premise | Modular, cloud-ready |
-| Test coverage | Manual only — no automated tests | BDD (behaviour-driven, plain-English test scripts) from day one |
+| Test coverage | TestComplete automations | BDD (behaviour-driven, plain-English test scripts) from day one |
 | Reporting | Zephyr (manual test management) | Masterthought (HTML test report tool) + CI |
 | Browser automation | None | Selenium 4 + Chromium |
 
