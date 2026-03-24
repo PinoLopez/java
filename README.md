@@ -29,7 +29,7 @@ Click any feature or scenario inside the report to expand its full step-by-step 
 
 **👉 [View live test report on GitHub Pages](https://pinolopez.github.io/java/)**
 
-The report shows each of the 19 scenarios with pass/fail status, duration,
+The report shows each of the 46 scenarios with pass/fail status, duration,
 step-level detail, and — if a scenario fails — an embedded screenshot taken
 at the exact moment of failure.
 
@@ -65,7 +65,7 @@ relevant to an enterprise migration project:
 | **Smoke – Basic** | Verify the system starts and the main entry point is reachable | Feature 01 — login |
 | **Smoke – Advanced** | Verify all primary modules load and key UI elements are present | Feature 03 — dashboard cards |
 | **End-to-End (E2E)** | Full user journey from login through a module to a result | Features 04, 06, 07, 08, 09 |
-| **Regression** | Re-run after any code change to confirm existing behaviour is unbroken | All 10 features run on every push via CI |
+| **Regression** | Re-run after any code change to confirm existing behaviour is unbroken | All 20 features run on every push via CI |
 | **On/Off (Docker)** | Full environment starts cleanly, health checks pass, stops and removes all containers and volumes without leaving orphans | Feature 15 — Docker Compose lifecycle |
 | **NFR** | Checks that the app is fast, stable, secure and easy to use — non-functional focused | Features 16–19 — JMeter · ZAP · axe-core · DSGVO · CI timeout · Hooks · POM |
 | **Always mandatory** | Integration, API, Security, Usability, Compliance, Smoke-in-Production | Feature 20 — HTTP contract checks + smoke-in-production |
@@ -123,7 +123,7 @@ cd ~/Documents/Java
 mvn verify
 ```
 
-The mock server starts automatically, all 19 scenarios run headless,
+The mock server starts automatically, all 46 scenarios run headless,
 the server stops, and the Masterthought report is generated at:
 ```
 cucumber-report/cucumber-html-reports/overview-features.html
@@ -190,7 +190,7 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 │   │       ├── HighlightHelper.java # JS colour injection for tested elements
 │   │       └── TestContext.java    # Shared WebDriver + base URL + DI root
 │   └── resources/
-│       ├── features/               # 10 Gherkin feature files
+│       ├── features/               # 20 Gherkin feature files
 │       └── config/
 │           └── cucumber.properties
 ├── cucumber-report/                # Masterthought report output (generated)

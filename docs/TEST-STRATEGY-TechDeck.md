@@ -41,7 +41,7 @@ We follow the industry-standard pyramid + BDD (behaviour-driven, plain-English t
 - **Performance** – total run < 3 min, measured in CI  
 - **Reliability** – screenshot + embed on every failure  
 - **Maintainability** – strict Page Object Model + clear naming  
-- **Load/Stress** – JMeter 2.13 via ProcessBuilder, JMX generated at runtime (Feature 16)  
+- **Load/Stress** – Java HttpClient concurrent threads (10 users), average response and error rate checked (Feature 16)  
 - **Security (OWASP)** – OWASP ZAP baseline scan via Docker, exit code < 2 = pass (Feature 17)  
 - **Accessibility (BITV/WCAG)** – axe-core 4.10.1 via AxeBuilder.analyze(), violations reported per page (Feature 18)  
 - **Scalability** – container resource limits tested  
