@@ -49,7 +49,7 @@ at the exact moment of failure.
 | **Legacy system** | Softproject X4 BPMS — in production for ~25 years |
 | **New platform** | TechDeck CoreSuite v1 — Java-based, cloud-ready replacement |
 | **Migration window** | 5-year parallel-run and cutover plan |
-| **Testing strategy** | BDD (behaviour-driven, plain-English test scripts) from day one — acceptance tests drive development |
+| **Testing strategy** | BDD (behaviour-driven, plain-English test scripts) from day one — acceptance tests drive development; results published via Masterthought (an HTML report tool that turns test results into a clear, clickable website) |
 | **Test scope** | Login, dashboard, 3 inspection domains, certification, audits, admin |
 | **Standards covered** | ISO 9001 · ISO 14001 · ISO 45001 · TÜV · ADAC · DSGVO |
 
@@ -83,8 +83,8 @@ relevant to an enterprise migration project:
   - `@After` — quits the browser and logs pass/fail status
 - `HighlightHelper` — applies a coloured background and border to each tested element via JavaScript injection; visible in failure screenshots embedded in the report
 - WebDriverManager — zero-config ChromeDriver management, no manual driver download
-- Python `http.server` — lightweight mock app server, no extra infrastructure needed
-- Masterthought reporting — a clickable test report that anyone can check in a few seconds, with feature/scenario/step breakdown, each scenario expandable
+- Python `http.server` — Python's built-in web server used to serve the mock app HTML files locally; no extra infrastructure or installation needed beyond Python itself
+- Masterthought reporting — an HTML report tool that turns test results into a clear, clickable website; shows every feature, scenario and step with pass/fail status, duration and failure screenshots
 - GitHub Actions CI — all tests run headless on every push in under 3 minutes
 - GitHub Pages — live report updated automatically after each CI run
 
@@ -102,7 +102,7 @@ chromium-browser --version  # or chromium
 
 ### Preview the mock app
 
-**👉 [Open live demo](https://pinolopez.github.io/java/mock-app/)** — no installation needed, works in any browser.
+**👉 [Open web app demo](https://pinolopez.github.io/java/mock-app/)** — no installation needed, works in any browser.
 
 Login credentials are shown directly on the login page: **inspector** / **suite2024**
 
@@ -110,12 +110,6 @@ This is the simulated TechDeck CoreSuite v1 interface the tests run against.
 It has 8 screens: Login, Dashboard, Vehicle Inspection, Industrial Safety,
 Environmental Testing, Certification, Audit Reports and Administration.
 
-> **Developers only — run locally instead:**
-> ```bash
-> cd mock-app
-> python3 -m http.server 8090
-> ```
-> Then open **http://localhost:8090**
 
 ### Run all tests
 ```bash
@@ -206,7 +200,7 @@ xdg-open cucumber-report/cucumber-html-reports/overview-features.html
 | Age | ~25 years | New build |
 | Architecture | Monolithic, on-premise | Modular, cloud-ready |
 | Test coverage | Manual only | BDD (behaviour-driven, plain-English test scripts) from day one |
-| Reporting | None | Masterthought + CI |
+| Reporting | None | Masterthought (HTML test report tool) + CI |
 | Browser automation | None | Selenium 4 + Chromium |
 
 ---

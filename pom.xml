@@ -212,7 +212,7 @@
               <executable>bash</executable>
               <arguments>
                 <argument>-c</argument>
-                <argument>fuser -k ${mock.server.port}/tcp 2>/dev/null || true</argument>
+                <argument>fuser -k ${mock.server.port}/tcp 2>/dev/null; exit 0</argument>
               </arguments>
             </configuration>
           </execution>
