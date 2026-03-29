@@ -1,4 +1,4 @@
-# TechDeck CoreSuite v1 — Test Plan (simple version for recruiters and managers)
+# TechDeck CoreSuite v1 — Test Plan
 
 **Version**: 1.0 | **Date**: March 2026 | **Owner**: QA Team
 
@@ -17,7 +17,7 @@ We make sure the new Java web app works perfectly before it replaces the old 25-
 | NFR (Performance, Security, Accessibility, DSGVO) | Speed, safety, easy for disabled users, data privacy | Every time + nightly |
 | API Contracts             | Backend connections work                           | Every time         |
 
-**Easy explanations**  
+**Explanations**  
 - **Embedded or via hooks**: Automatic background helpers that run without you noticing.  
 - **Data-driven**: One test that automatically tries many different examples.  
 - **Docker/OWASP in CI**: Heavy checks are available manually or run nightly so the normal pipeline stays super fast (~2 minutes).

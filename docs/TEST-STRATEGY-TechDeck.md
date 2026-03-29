@@ -38,7 +38,7 @@ We follow the industry-standard pyramid + BDD (behaviour-driven, plain-English t
 **When**: During deployment pipeline and environment switch tests.
 
 ### Non-Functional Requirements (NFR)
-- **Performance** – total run < 3 min, measured in CI  
+- **Performance** – total run < 5 min, measured in CI  
 - **Reliability** – screenshot + embed on every failure  
 - **Maintainability** – strict Page Object Model + clear naming  
 - **Load/Stress** – Java HttpClient concurrent threads (10 users), average response and error rate checked (Feature 16)  
@@ -47,7 +47,7 @@ We follow the industry-standard pyramid + BDD (behaviour-driven, plain-English t
 - **Scalability** – container resource limits tested  
 - **DSGVO compliance** – page source credential checks, password field inspection, email input audit (Feature 19)
 
-### Always Mandatory Tests (TechDeck standard)
+### Mandatory Tests (TechDeck standard)
 The following are **never skipped** in any release:
 - Integration tests  
 - API contract tests  
