@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CoreSuite – Certification Management</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f8}
+    header{background:#00843D;color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+    header .brand{font-size:1.2rem;font-weight:700}
+    header .brand span{font-weight:300}
+    nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:.88rem}
+    .page-title{background:#fff;border-bottom:1px solid #ddd;padding:20px 32px}
+    .page-title h2{font-size:1.3rem;color:#00843D;font-weight:700}
+    .page-title p{font-size:.83rem;color:#666;margin-top:4px}
+    .container{padding:28px 32px;max-width:1000px}
+    .section-title{font-size:1rem;font-weight:700;color:#333;margin-bottom:14px}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:24px}
+    th{background:#00843D;color:#fff;padding:12px 16px;text-align:left;font-size:.83rem}
+    td{padding:11px 16px;font-size:.85rem;border-bottom:1px solid #f0f0f0}
+    tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
+    .badge.active{background:#d4edda;color:#155724}
+    .badge.expiring{background:#fff3cd;color:#856404}
+    .badge.expired{background:#f8d7da;color:#721c24}
+    #issue-cert-btn{background:#00843D;color:#fff;border:none;border-radius:4px;padding:9px 20px;cursor:pointer;font-weight:600;margin-bottom:20px}
+    .alert-box{background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.85rem;color:#856404}
+    .alert-box strong{display:block;margin-bottom:4px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">CoreSuite</div>
+  <nav role="navigation">
+    <a href="dashboard.html" aria-label="Back to Dashboard">← Dashboard</a>
+    <a href="certification.html" aria-label="Certification Management">Certification</a>
+    <a href="audits.html" aria-label="Audit Reports">Audits</a>
+  </nav>
+</header>
+<div class="page-title" role="main">
+  <h2 id="module-title">Certification Management</h2>
+  <p>ISO, TÜV and ADAC certification lifecycle — issuance, renewal and revocation</p>
+</div>
+<div class="container" role="main">
+  <div class="alert-box" role="alert">
+    <strong>Warning: Expiry Alert</strong>
+    3 certifications expire within the next 30 days. Review required.
+  </div>
+  <div class="section-title">Active Certifications</div>
+  <button id="issue-cert-btn" onclick="alert('Issue certificate form opened')" aria-label="Issue New Certificate">+ Issue Certificate</button>
+  <table id="cert-table" role="table" aria-label="Certifications">
+    <thead>
+      <tr><th>Cert. ID</th><th>Organisation</th><th>Standard</th><th>Scope</th><th>Issued</th><th>Expires</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CERT-ISO-9001-0341</td><td>Iberdrola S.A.</td><td>ISO 9001:2015</td><td>Energy distribution</td><td>2022-05-10</td><td>2025-05-09</td><td><span class="badge active">ACTIVE</span></td></tr>
+      <tr><td>CERT-ISO-45001-0219</td><td>Repsol Petroquímica</td><td>ISO 45001:2018</td><td>Refinery operations</td><td>2021-11-22</td><td>2024-04-15</td><td><span class="badge expiring">EXPIRING</span></td></tr>
+      <tr><td>CERT-ISO-14001-0188</td><td>Acerinox S.A.</td><td>ISO 14001:2015</td><td>Steel manufacturing</td><td>2020-08-30</td><td>2023-08-29</td><td><span class="badge expired">EXPIRED</span></td></tr>
+      <tr><td>CERT-ADAC-0077</td><td>AutoFleet SL</td><td>ADAC Fleet</td><td>Commercial fleet</td><td>2023-01-15</td><td>2026-01-14</td><td><span class="badge active">ACTIVE</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

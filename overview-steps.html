@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/cucumber.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script>
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<title>Cucumber Reports (no 1) - Steps Overview</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber Report</p>
+      <ul class="nav navbar-nav navbar-right">
+        <li role="presentation" ><a href="overview-features.html">Features</a></li>
+        <li role="presentation" ><a href="overview-tags.html">Tags</a></li>
+        <li role="presentation"     class="active" ><a href="overview-steps.html">Steps</a></li>
+        <li role="presentation" ><a href="overview-failures.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-md-5 col-md-offset-1">
+
+<table class="table table-bordered" id="build-info">
+  <thead>
+    <tr>
+      <th>Project</th>
+        <th>Number</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+      <td>CoreSuite</td>
+        <td>1</td>
+      <td>29 Mar 2026, 10:50</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  <div class="col-md-3 col-md-offset-2">
+  </div>
+</div>
+
+
+<div id="report-lead" class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Steps Statistics</h2>
+      <p>The following graph shows step statistics for this build. Below list is based on results.
+ step does not provide information about result then is not listed below.
+ Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>
+  </div>
+</div>
+
+<div class="container-fluid" id="report">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table id="tablesorter" class="stats-table table-hover">
+
+        <thead>
+          <tr class="header">
+            <th>Implementation</th>
+            <th>Occurrences</th>
+            <th>Average duration</th>
+            <th>Max duration</th>
+            <th>Total durations</th>
+            <th>Ratio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.MandatoryStepDefinitions.getRequest(java.lang.String)</td>
+              <td>7</td>
+              <td class="duration" data-value="1989436">0.001</td>
+              <td class="duration" data-value="1989436">0.002</td>
+              <td class="duration" data-value="13926057">0.013</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.MandatoryStepDefinitions.httpResponseStatusIs(int)</td>
+              <td>7</td>
+              <td class="duration" data-value="91167">0.000</td>
+              <td class="duration" data-value="91167">0.000</td>
+              <td class="duration" data-value="638173">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.MandatoryStepDefinitions.mockServerBaseUrlConfigured()</td>
+              <td>7</td>
+              <td class="duration" data-value="97639">0.000</td>
+              <td class="duration" data-value="97639">0.000</td>
+              <td class="duration" data-value="683479">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.MandatoryStepDefinitions.responseBodyContains(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="326480">0.000</td>
+              <td class="duration" data-value="326480">0.000</td>
+              <td class="duration" data-value="326480">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrAccessibilityStepDefinitions.noAccessibilityViolations()</td>
+              <td>3</td>
+              <td class="duration" data-value="588529963">0.588</td>
+              <td class="duration" data-value="588529963">0.686</td>
+              <td class="duration" data-value="1765589890">1.765</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrDsgvoStepDefinitions.noHardcodedPersonalData()</td>
+              <td>1</td>
+              <td class="duration" data-value="7550935">0.007</td>
+              <td class="duration" data-value="7550935">0.007</td>
+              <td class="duration" data-value="7550935">0.007</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrDsgvoStepDefinitions.noPlaintextPasswords()</td>
+              <td>1</td>
+              <td class="duration" data-value="13828854">0.013</td>
+              <td class="duration" data-value="13828854">0.013</td>
+              <td class="duration" data-value="13828854">0.013</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrDsgvoStepDefinitions.noRawEmailInputs()</td>
+              <td>1</td>
+              <td class="duration" data-value="15860749">0.015</td>
+              <td class="duration" data-value="15860749">0.015</td>
+              <td class="duration" data-value="15860749">0.015</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrPerformanceStepDefinitions.avgResponseTimeBelow(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="5344722">0.005</td>
+              <td class="duration" data-value="5344722">0.005</td>
+              <td class="duration" data-value="5344722">0.005</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrPerformanceStepDefinitions.configureThreads(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="1511105">0.001</td>
+              <td class="duration" data-value="1511105">0.001</td>
+              <td class="duration" data-value="1511105">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrPerformanceStepDefinitions.errorRateBelow(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="653331">0.000</td>
+              <td class="duration" data-value="653331">0.000</td>
+              <td class="duration" data-value="653331">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrPerformanceStepDefinitions.executeLoadTest()</td>
+              <td>1</td>
+              <td class="duration" data-value="13988389">0.013</td>
+              <td class="duration" data-value="13988389">0.013</td>
+              <td class="duration" data-value="13988389">0.013</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.NfrPerformanceStepDefinitions.mockAvailableForLoad()</td>
+              <td>1</td>
+              <td class="duration" data-value="2374559">0.002</td>
+              <td class="duration" data-value="2374559">0.002</td>
+              <td class="duration" data-value="2374559">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.SmokeStepDefinitions.pageTitleContains(java.lang.String)</td>
+              <td>5</td>
+              <td class="duration" data-value="6605669">0.006</td>
+              <td class="duration" data-value="6605669">0.008</td>
+              <td class="duration" data-value="33028346">0.033</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.anErrorMessageIsDisplayedOnTheLoginPage()</td>
+              <td>2</td>
+              <td class="duration" data-value="19117538">0.019</td>
+              <td class="duration" data-value="19117538">0.019</td>
+              <td class="duration" data-value="38235077">0.038</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.atLeastNRiskCardsVisible(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="2472295249">2.472</td>
+              <td class="duration" data-value="2472295249">2.472</td>
+              <td class="duration" data-value="2472295249">2.472</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.atLeastOneCardShowsLabel(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="20388832">0.020</td>
+              <td class="duration" data-value="20388832">0.028</td>
+              <td class="duration" data-value="40777665">0.040</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.atLeastOneCertificationShowsStatus(java.lang.String)</td>
+              <td>3</td>
+              <td class="duration" data-value="20557001">0.020</td>
+              <td class="duration" data-value="20557001">0.022</td>
+              <td class="duration" data-value="61671005">0.061</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.atLeastOneReportShowsStatus(java.lang.String)</td>
+              <td>4</td>
+              <td class="duration" data-value="24286881">0.024</td>
+              <td class="duration" data-value="24286881">0.032</td>
+              <td class="duration" data-value="97147526">0.097</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.atLeastOneResultShowsStatus(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="19672769">0.019</td>
+              <td class="duration" data-value="19672769">0.021</td>
+              <td class="duration" data-value="39345539">0.039</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.auditReportsTableVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="635992365">0.635</td>
+              <td class="duration" data-value="635992365">0.635</td>
+              <td class="duration" data-value="635992365">0.635</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.certificationTableContainsRows(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="13626057">0.013</td>
+              <td class="duration" data-value="13626057">0.013</td>
+              <td class="duration" data-value="13626057">0.013</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.clicksTheSignInButton()</td>
+              <td>5</td>
+              <td class="duration" data-value="1289537636">1.289</td>
+              <td class="duration" data-value="1289537636">1.304</td>
+              <td class="duration" data-value="6447688181">6.447</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.defaultLanguageSelectorVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="628537894">0.628</td>
+              <td class="duration" data-value="628537894">0.628</td>
+              <td class="duration" data-value="628537894">0.628</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.eachRowDisplaysPlateNumber()</td>
+              <td>1</td>
+              <td class="duration" data-value="21947903">0.021</td>
+              <td class="duration" data-value="21947903">0.021</td>
+              <td class="duration" data-value="21947903">0.021</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.eachRowDisplaysResultBadge()</td>
+              <td>1</td>
+              <td class="duration" data-value="10008922">0.010</td>
+              <td class="duration" data-value="10008922">0.010</td>
+              <td class="duration" data-value="10008922">0.010</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.expiryAlertBannerVisible()</td>
+              <td>2</td>
+              <td class="duration" data-value="634149427">0.634</td>
+              <td class="duration" data-value="634149427">0.635</td>
+              <td class="duration" data-value="1268298855">1.268</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.failedInspectionsKpiVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="632479699">0.632</td>
+              <td class="duration" data-value="632479699">0.632</td>
+              <td class="duration" data-value="632479699">0.632</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.inspectionTableHasRows(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="44969422">0.044</td>
+              <td class="duration" data-value="44969422">0.044</td>
+              <td class="duration" data-value="44969422">0.044</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.inspectionTableShowsMatching(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="29624489">0.029</td>
+              <td class="duration" data-value="29624489">0.032</td>
+              <td class="duration" data-value="59248979">0.059</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.navigatesToAdministration()</td>
+              <td>4</td>
+              <td class="duration" data-value="23980813">0.023</td>
+              <td class="duration" data-value="23980813">0.027</td>
+              <td class="duration" data-value="95923253">0.095</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.navigatesToAuditReports()</td>
+              <td>4</td>
+              <td class="duration" data-value="19893462">0.019</td>
+              <td class="duration" data-value="19893462">0.023</td>
+              <td class="duration" data-value="79573850">0.079</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.navigatesToCertification()</td>
+              <td>4</td>
+              <td class="duration" data-value="22466117">0.022</td>
+              <td class="duration" data-value="22466117">0.023</td>
+              <td class="duration" data-value="89864469">0.089</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.navigatesToEnvironmental()</td>
+              <td>3</td>
+              <td class="duration" data-value="22398918">0.022</td>
+              <td class="duration" data-value="22398918">0.030</td>
+              <td class="duration" data-value="67196756">0.067</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.navigatesToIndustrialSafety()</td>
+              <td>3</td>
+              <td class="duration" data-value="23590531">0.023</td>
+              <td class="duration" data-value="23590531">0.028</td>
+              <td class="duration" data-value="70771595">0.070</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.navigatesToVehicleInspection()</td>
+              <td>5</td>
+              <td class="duration" data-value="25439225">0.025</td>
+              <td class="duration" data-value="25439225">0.028</td>
+              <td class="duration" data-value="127196128">0.127</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.newAuditReportButtonVisibleAndHighlighted()</td>
+              <td>1</td>
+              <td class="duration" data-value="634813380">0.634</td>
+              <td class="duration" data-value="634813380">0.634</td>
+              <td class="duration" data-value="634813380">0.634</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.newInspectionButtonIsHighlighted()</td>
+              <td>1</td>
+              <td class="duration" data-value="621235262">0.621</td>
+              <td class="duration" data-value="621235262">0.621</td>
+              <td class="duration" data-value="621235262">0.621</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.newInspectionButtonIsVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="22353682">0.022</td>
+              <td class="duration" data-value="22353682">0.022</td>
+              <td class="duration" data-value="22353682">0.022</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.newSampleButtonVisibleAndHighlighted()</td>
+              <td>1</td>
+              <td class="duration" data-value="627844700">0.627</td>
+              <td class="duration" data-value="627844700">0.627</td>
+              <td class="duration" data-value="627844700">0.627</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.passedInspectionsKpiVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="630687147">0.630</td>
+              <td class="duration" data-value="630687147">0.630</td>
+              <td class="duration" data-value="630687147">0.630</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.pendingReviewKpiVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="632298160">0.632</td>
+              <td class="duration" data-value="632298160">0.632</td>
+              <td class="duration" data-value="632298160">0.632</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.reportFormatSelectorVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="627060144">0.627</td>
+              <td class="duration" data-value="627060144">0.627</td>
+              <td class="duration" data-value="627060144">0.627</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.safetyAssessmentsTableVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="634898808">0.634</td>
+              <td class="duration" data-value="634898808">0.634</td>
+              <td class="duration" data-value="634898808">0.634</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.sampleResultsTableVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="656218076">0.656</td>
+              <td class="duration" data-value="656218076">0.656</td>
+              <td class="duration" data-value="656218076">0.656</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.sessionTimeoutFieldVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="636127814">0.636</td>
+              <td class="duration" data-value="636127814">0.636</td>
+              <td class="duration" data-value="636127814">0.636</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.tableContainsAtLeastRow(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="11054741">0.011</td>
+              <td class="duration" data-value="11054741">0.011</td>
+              <td class="duration" data-value="11054741">0.011</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.tableContainsAtLeastUserRows(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="9761350">0.009</td>
+              <td class="duration" data-value="9761350">0.009</td>
+              <td class="duration" data-value="9761350">0.009</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theCoresuiteLoginPageIsOpen()</td>
+              <td>7</td>
+              <td class="duration" data-value="917839265">0.917</td>
+              <td class="duration" data-value="917839265">4.314</td>
+              <td class="duration" data-value="6424874859">6.424</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theDashboardPageIsDisplayed()</td>
+              <td>3</td>
+              <td class="duration" data-value="5497278">0.005</td>
+              <td class="duration" data-value="5497278">0.006</td>
+              <td class="duration" data-value="16491834">0.016</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theDashboardPageLoads()</td>
+              <td>4</td>
+              <td class="duration" data-value="3589500">0.003</td>
+              <td class="duration" data-value="3589500">0.004</td>
+              <td class="duration" data-value="14358001">0.014</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theInspectorClicksModuleCard(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="1112452928">1.112</td>
+              <td class="duration" data-value="1112452928">1.113</td>
+              <td class="duration" data-value="2224905857">2.224</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theInspectorEntersCredentials(java.lang.String,java.lang.String)</td>
+              <td>5</td>
+              <td class="duration" data-value="1383932500">1.383</td>
+              <td class="duration" data-value="1383932500">1.398</td>
+              <td class="duration" data-value="6919662501">6.919</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theInspectorIsLoggedIn()</td>
+              <td>27</td>
+              <td class="duration" data-value="3057473923">3.057</td>
+              <td class="duration" data-value="3057473923">4.858</td>
+              <td class="duration" data-value="82551795939">1:22.551</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theInspectorSearchesFor(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="1038267565">1.038</td>
+              <td class="duration" data-value="1038267565">1.046</td>
+              <td class="duration" data-value="2076535131">2.076</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theLoginFormIsStillVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="14883469">0.014</td>
+              <td class="duration" data-value="14883469">0.014</td>
+              <td class="duration" data-value="14883469">0.014</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theMainNavigationIsVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="17631746">0.017</td>
+              <td class="duration" data-value="17631746">0.017</td>
+              <td class="duration" data-value="17631746">0.017</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theModuleCardIsVisible(java.lang.String)</td>
+              <td>12</td>
+              <td class="duration" data-value="643787804">0.643</td>
+              <td class="duration" data-value="643787804">0.660</td>
+              <td class="duration" data-value="7725453657">7.725</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theUserIsListedInTheTable(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="18912791">0.018</td>
+              <td class="duration" data-value="18912791">0.018</td>
+              <td class="duration" data-value="18912791">0.018</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.theVehicleInspectionModuleIsOpen()</td>
+              <td>2</td>
+              <td class="duration" data-value="8065368">0.008</td>
+              <td class="duration" data-value="8065368">0.008</td>
+              <td class="duration" data-value="16130737">0.016</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.totalInspectionsKpiVisible()</td>
+              <td>2</td>
+              <td class="duration" data-value="633401050">0.633</td>
+              <td class="duration" data-value="633401050">0.636</td>
+              <td class="duration" data-value="1266802100">1.266</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.typeFilterDropdownVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="634638758">0.634</td>
+              <td class="duration" data-value="634638758">0.634</td>
+              <td class="duration" data-value="634638758">0.634</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.stepdefinitions.StepDefinitions.userManagementTableVisible()</td>
+              <td>1</td>
+              <td class="duration" data-value="636198508">0.636</td>
+              <td class="duration" data-value="636198508">0.636</td>
+              <td class="duration" data-value="636198508">0.636</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.support.Hooks.setUp(io.cucumber.java.Scenario)</td>
+              <td>42</td>
+              <td class="duration" data-value="184094">0.000</td>
+              <td class="duration" data-value="184094">0.001</td>
+              <td class="duration" data-value="7731949">0.007</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.wikipedia.tests.support.Hooks.tearDown(io.cucumber.java.Scenario)</td>
+              <td>42</td>
+              <td class="duration" data-value="57840847">0.057</td>
+              <td class="duration" data-value="57840847">0.076</td>
+              <td class="duration" data-value="2429315578">2.429</td>
+              <td class="passed">100.00%</td>
+            </tr>
+        </tbody>
+
+        <tfoot class="total">
+          <tr>
+            <td>65</td>
+            <td>258</td>
+            <td class="duration">0.518</td>
+            <td class="duration">1:22.551</td>
+            <td class="duration">2:13.658</td>
+            <td>Totals</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>

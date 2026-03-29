@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CoreSuite – Login</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#1a2634;display:flex;align-items:center;justify-content:center;min-height:100vh}
+    .card{background:#fff;border-radius:8px;padding:40px 48px;width:380px;box-shadow:0 8px 32px rgba(0,0,0,.35)}
+    .logo{text-align:center;margin-bottom:28px}
+    .logo span.brand{font-size:1.7rem;font-weight:700;color:#00843D}
+    .logo span.suite{font-size:1.7rem;font-weight:300;color:#333}
+    .logo p{font-size:.78rem;color:#777;margin-top:4px;letter-spacing:.5px}
+    label{display:block;font-size:.82rem;font-weight:600;color:#444;margin-bottom:4px}
+    input{width:100%;border:1px solid #ccc;border-radius:4px;padding:9px 12px;font-size:.95rem;margin-bottom:18px;transition:border .2s}
+    input:focus{outline:none;border-color:#00843D}
+    button{width:100%;background:#00843D;color:#fff;border:none;border-radius:4px;padding:11px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s}
+    button:hover{background:#006b32}
+    .error{display:none;color:#c0392b;font-size:.82rem;margin-top:-12px;margin-bottom:12px}
+    footer{text-align:center;margin-top:22px;font-size:.72rem;color:#aaa}
+  </style>
+</head>
+<body>
+<div class="card" role="main">
+  <div class="logo">
+    <div><span class="brand">TechDeck</span><span class="suite"> CoreSuite</span></div>
+    <p>Enterprise Inspection & Certification Platform</p>
+  </div>
+  <label for="username">Username</label>
+  <input id="username" type="text" placeholder="inspector.id" aria-label="Username" autocomplete="off" required/>
+  <label for="password">Password</label>
+  <input id="password" type="password" placeholder="••••••••" aria-label="Password" required/>
+  <p id="login-error" class="error" role="alert">Invalid credentials. Please try again.</p>
+  <p style="text-align:center;font-size:.78rem;color:#777;margin-bottom:12px;">Demo: <strong>inspector</strong> / <strong>suite2024</strong></p>
+  <button id="login-btn" onclick="doLogin()" aria-label="Sign In">Sign In</button>
+  <footer>v3.1.0 | © 2026 Certification Services Ltd.</footer>
+</div>
+<script>
+  function doLogin(){
+    var u=document.getElementById('username').value.trim();
+    var p=document.getElementById('password').value.trim();
+    var err=document.getElementById('login-error');
+    if(u==='inspector' && p==='suite2024'){
+      window.location.href='dashboard.html';
+    } else {
+      err.style.display='block';
+    }
+  }
+  document.addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+</script>
+</body>
+</html>
