@@ -1,36 +1,25 @@
-# TechDeck CoreSuite v1 — Detailed Test Plan
+# TechDeck CoreSuite v1 — Test Plan (simple version for recruiters and managers)
 
-**Version**: 1.0 | **Date**: March 2026 | **Owner**: QA Automation Team
+**Version**: 1.0 | **Date**: March 2026 | **Owner**: QA Team
 
-## Test Scope & Objectives
+## What we test and why
+We make sure the new Java web app works perfectly before it replaces the old 25-year-old system.
 
-Replace legacy Softproject X4 BPMS safely with zero production incidents by verifying
-every functional and non-functional requirement before and during migration.
+## Test Categories (everything that is covered)
 
-## Test Categories & Execution Plan
+| Category                  | What it does (simple)                              | How often          |
+|---------------------------|----------------------------------------------------|--------------------|
+| Smoke Basic               | App starts + login works                           | Every time         |
+| Smoke Advanced            | All main pages open                                | Every time         |
+| End-to-End Journeys       | Full real-user workflows                           | Every time         |
+| Regression                | Nothing broke after changes                        | Every time         |
+| Docker On/Off             | Environment starts and stops cleanly               | Every time         |
+| NFR (Performance, Security, Accessibility, DSGVO) | Speed, safety, easy for disabled users, data privacy | Every time + nightly |
+| API Contracts             | Backend connections work                           | Every time         |
 
-| Category                | Sub-type                                                                                              | Status in suite | Execution frequency     | Responsible     |
-|-------------------------|-------------------------------------------------------------------------------------------------------|-----------------|-------------------------|-----------------|
-| Smoke                   | Basic                                                                                                 | Covered         | Every CI / Deploy       | Automation      |
-| Smoke                   | Advanced                                                                                              | Covered         | Every build             | Automation      |
-| End-to-End              | Full user journeys                                                                                    | Covered         | Nightly + Pre-Release   | Automation      |
-| Regression              | Full suite                                                                                            | Covered         | Every push              | CI Pipeline     |
-| On/Off (Infrastructure) | Docker Compose up/down — environment starts, health checks pass, stops and removes all containers and volumes cleanly | Covered | Deployment pipeline | DevOps + QA |
-| NFR                     | Performance / Reliability / Maintainability                                                           | Covered         | CI + Monitoring         | Automation      |
-| NFR                     | Load/Stress (JMeter), Security (OWASP ZAP), Accessibility (axe-core/BITV/WCAG), DSGVO                | Covered         | On demand + CI gate     | QA + Security   |
-| Mandatory (never skipped) | Integration, API, Security, Usability, Compliance, Smoke-in-Production                             | Covered         | Release gate + every push | All teams     |
+**Easy explanations**  
+- **Embedded or via hooks**: Automatic background helpers that run without you noticing.  
+- **Data-driven**: One test that automatically tries many different examples.  
+- **Docker/OWASP in CI**: Heavy checks are available manually or run nightly so the normal pipeline stays super fast (~2 minutes).
 
-## On/Off Infrastructure Tests (to be implemented)
-
-1. `docker compose up -d --build` → all containers reach healthy state
-2. Run smoke suite against the live environment
-3. `docker compose down -v --rmi all` → verify full cleanup: no orphan containers, no leftover volumes
-4. Repeat cycle 3 times → assert 100% success rate
-
-## Additional Information
-
-Entry / Exit Criteria, Risks, RACI, defect management and release gates are available on request.
-This is the clear executive summary for international stakeholders.
-
-**This plan guarantees** that TechDeck CoreSuite v1 meets the highest enterprise quality
-standards required for inspection and certification platforms.
+This plan guarantees the new app meets enterprise standards.

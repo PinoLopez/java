@@ -2,37 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CoreSuite – Dashboard</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f8;color:#222}
-    header{background:#00843D;color:#fff;padding:14px 32px;
-           display:flex;align-items:center;justify-content:space-between}
+    header{background:#00843D;color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
     header .brand{font-size:1.25rem;font-weight:700}
     header .brand span{font-weight:300}
-    nav a{color:#fff;text-decoration:none;margin-left:24px;
-          font-size:.9rem;opacity:.85;transition:opacity .2s}
+    nav a{color:#fff;text-decoration:none;margin-left:24px;font-size:.9rem;opacity:.85;transition:opacity .2s}
     nav a:hover{opacity:1}
-    .hero{background:#00843D;color:#fff;padding:32px 32px 48px;
-          margin-bottom:-20px}
+    .hero{background:#00843D;color:#fff;padding:32px 32px 48px;margin-bottom:-20px}
     .hero h1{font-size:1.6rem;font-weight:300}
     .hero h1 strong{font-weight:700}
     .hero p{margin-top:6px;opacity:.85;font-size:.92rem}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
-          padding:32px;max-width:1100px;margin:0 auto}
-    .card{background:#fff;border-radius:8px;padding:24px 28px;
-          box-shadow:0 2px 8px rgba(0,0,0,.08);
-          border-top:4px solid #00843D;cursor:pointer;
-          transition:transform .15s,box-shadow .15s}
-    .card:hover{transform:translateY(-3px);
-                box-shadow:0 6px 20px rgba(0,0,0,.13)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:32px;max-width:1100px;margin:0 auto}
+    .card{background:#fff;border-radius:8px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #00843D;cursor:pointer;transition:transform .15s,box-shadow .15s}
+    .card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.13)}
     .card h3{font-size:1rem;font-weight:700;margin-bottom:6px;color:#00843D}
     .card p{font-size:.83rem;color:#666;line-height:1.5}
-    .card a{display:inline-block;margin-top:14px;font-size:.8rem;
-            color:#00843D;text-decoration:none;font-weight:600}
-    .status-bar{background:#fff;border-top:1px solid #e0e0e0;
-                padding:12px 32px;display:flex;gap:32px;
-                font-size:.78rem;color:#666}
+    .card a{display:inline-block;margin-top:14px;font-size:.8rem;color:#00843D;text-decoration:none;font-weight:600}
+    .status-bar{background:#fff;border-top:1px solid #e0e0e0;padding:12px 32px;display:flex;gap:32px;font-size:.78rem;color:#666}
     .status-bar span strong{color:#00843D}
     #user-display{font-size:.85rem}
   </style>
@@ -40,56 +30,48 @@
 <body>
 <header>
   <div class="brand">CoreSuite</div>
-  <nav>
-    <a href="vehicle-inspection.html">Vehicle</a>
-    <a href="industrial-safety.html">Industrial</a>
-    <a href="environmental.html">Environmental</a>
-    <a href="certification.html">Certification</a>
-    <a href="audits.html">Audits</a>
-    <span id="user-display" style="margin-left:24px;opacity:.75">
-      inspector
-    </span>
+  <nav role="navigation">
+    <a href="vehicle-inspection.html" aria-label="Open Vehicle Inspection">Vehicle</a>
+    <a href="industrial-safety.html" aria-label="Open Industrial Safety">Industrial</a>
+    <a href="environmental.html" aria-label="Open Environmental Testing">Environmental</a>
+    <a href="certification.html" aria-label="Open Certification">Certification</a>
+    <a href="audits.html" aria-label="Open Audit Reports">Audits</a>
+    <span id="user-display" style="margin-left:24px;opacity:.75" aria-label="Logged in user">inspector</span>
   </nav>
 </header>
-<div class="hero">
+<div class="hero" role="main">
   <h1><strong>Welcome</strong> to CoreSuite</h1>
-  <p>Enterprise Inspection, Certification &amp; Safety Management Platform</p>
+  <p>Enterprise Inspection, Certification & Safety Management Platform</p>
 </div>
-<div class="grid">
-  <div class="card" id="card-vehicle">
+<div class="grid" role="main">
+  <div class="card" id="card-vehicle" aria-label="Vehicle Inspection module">
     <h3>Vehicle Inspection</h3>
-    <p>Manage periodic roadworthiness inspections, MOT/ITV records and
-       emission test results across all registered stations.</p>
+    <p>Manage periodic roadworthiness inspections, MOT/ITV records and emission test results across all registered stations.</p>
     <a href="vehicle-inspection.html">Open module →</a>
   </div>
-  <div class="card" id="card-industrial">
+  <div class="card" id="card-industrial" aria-label="Industrial Safety module">
     <h3>Industrial Safety</h3>
-    <p>Track workplace risk assessments, equipment certification and
-       compliance with ISO 45001 safety standards.</p>
+    <p>Track workplace risk assessments, equipment certification and compliance with ISO 45001 safety standards.</p>
     <a href="industrial-safety.html">Open module →</a>
   </div>
-  <div class="card" id="card-environmental">
+  <div class="card" id="card-environmental" aria-label="Environmental Testing module">
     <h3>Environmental Testing</h3>
-    <p>Record emissions sampling, soil and water analysis results,
-       and ISO 14001 environmental audit findings.</p>
+    <p>Record emissions sampling, soil and water analysis results, and ISO 14001 environmental audit findings.</p>
     <a href="environmental.html">Open module →</a>
   </div>
-  <div class="card" id="card-certification">
+  <div class="card" id="card-certification" aria-label="Certification Management module">
     <h3>Certification Management</h3>
-    <p>Issue, renew and revoke ISO, TÜV, and ADAC certifications
-       with full audit trail and expiry notifications.</p>
+    <p>Issue, renew and revoke ISO, TÜV, and ADAC certifications with full audit trail and expiry notifications.</p>
     <a href="certification.html">Open module →</a>
   </div>
-  <div class="card" id="card-audits">
+  <div class="card" id="card-audits" aria-label="Audit Reports module">
     <h3>Audit Reports</h3>
-    <p>Generate structured audit reports for regulatory submission,
-       internal review and client delivery.</p>
+    <p>Generate structured audit reports for regulatory submission, internal review and client delivery.</p>
     <a href="audits.html">Open module →</a>
   </div>
-  <div class="card" id="card-admin">
+  <div class="card" id="card-admin" aria-label="Administration module">
     <h3>Administration</h3>
-    <p>Manage users, inspection stations, notification rules
-       and system configuration settings.</p>
+    <p>Manage users, inspection stations, notification rules and system configuration settings.</p>
     <a href="admin.html">Open module →</a>
   </div>
 </div>

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CoreSuite – Industrial Safety</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f8}
-    header{background:#00843D;color:#fff;padding:14px 32px;
-           display:flex;align-items:center;justify-content:space-between}
+    header{background:#00843D;color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
     header .brand{font-size:1.2rem;font-weight:700}
     header .brand span{font-weight:300}
     nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:.88rem}
@@ -15,92 +15,68 @@
     .page-title h2{font-size:1.3rem;color:#00843D;font-weight:700}
     .page-title p{font-size:.83rem;color:#666;margin-top:4px}
     .container{padding:28px 32px;max-width:1000px}
-    .risk-grid{display:grid;grid-template-columns:repeat(2,1fr);
-               gap:16px;margin-bottom:28px}
-    .risk-card{background:#fff;border-radius:8px;padding:20px 24px;
-               box-shadow:0 2px 8px rgba(0,0,0,.07)}
-    .risk-card h4{font-size:.92rem;font-weight:700;margin-bottom:8px;
-                  color:#333}
+    .risk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:28px}
+    .risk-card{background:#fff;border-radius:8px;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .risk-card h4{font-size:.92rem;font-weight:700;margin-bottom:8px;color:#333}
     .risk-card p{font-size:.82rem;color:#666;line-height:1.5}
-    .risk-level{display:inline-block;padding:2px 10px;border-radius:10px;
-                font-size:.75rem;font-weight:700;margin-top:8px}
+    .risk-level{display:inline-block;padding:2px 10px;border-radius:10px;font-size:.75rem;font-weight:700;margin-top:8px}
     .risk-level.high{background:#f8d7da;color:#721c24}
     .risk-level.medium{background:#fff3cd;color:#856404}
     .risk-level.low{background:#d4edda;color:#155724}
-    table{width:100%;border-collapse:collapse;background:#fff;
-          border-radius:8px;overflow:hidden;
-          box-shadow:0 2px 8px rgba(0,0,0,.07)}
-    th{background:#00843D;color:#fff;padding:12px 16px;
-       text-align:left;font-size:.83rem}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    th{background:#00843D;color:#fff;padding:12px 16px;text-align:left;font-size:.83rem}
     td{padding:11px 16px;font-size:.85rem;border-bottom:1px solid #f0f0f0}
     tr:last-child td{border-bottom:none}
-    .section-title{font-size:1rem;font-weight:700;color:#333;
-                   margin-bottom:14px;margin-top:8px}
-    #add-assessment-btn{background:#00843D;color:#fff;border:none;
-                        border-radius:4px;padding:9px 20px;cursor:pointer;
-                        font-weight:600;margin-bottom:20px}
+    .section-title{font-size:1rem;font-weight:700;color:#333;margin-bottom:14px;margin-top:8px}
+    #add-assessment-btn{background:#00843D;color:#fff;border:none;border-radius:4px;padding:9px 20px;cursor:pointer;font-weight:600;margin-bottom:20px}
   </style>
 </head>
 <body>
 <header>
   <div class="brand">CoreSuite</div>
-  <nav>
-    <a href="dashboard.html">← Dashboard</a>
-    <a href="vehicle-inspection.html">Vehicle</a>
-    <a href="industrial-safety.html">Industrial</a>
-    <a href="environmental.html">Environmental</a>
+  <nav role="navigation">
+    <a href="dashboard.html" aria-label="Back to Dashboard">← Dashboard</a>
+    <a href="vehicle-inspection.html" aria-label="Vehicle Inspection">Vehicle</a>
+    <a href="industrial-safety.html" aria-label="Industrial Safety">Industrial</a>
+    <a href="environmental.html" aria-label="Environmental Testing">Environmental</a>
   </nav>
 </header>
-<div class="page-title">
+<div class="page-title" role="main">
   <h2 id="module-title">Industrial Safety Module</h2>
   <p>ISO 45001 risk assessments, equipment certification and workplace compliance</p>
 </div>
-<div class="container">
+<div class="container" role="main">
   <div class="section-title">Active Risk Assessments</div>
   <div class="risk-grid">
-    <div class="risk-card" id="risk-1">
+    <div class="risk-card" id="risk-1" aria-label="Pressure Vessel Inspection">
       <h4>Pressure Vessel Inspection – Plant A</h4>
       <p>Annual hydrostatic test per EN 13445. Last inspection: 2023-11-04.</p>
       <span class="risk-level medium">MEDIUM RISK</span>
     </div>
-    <div class="risk-card" id="risk-2">
+    <div class="risk-card" id="risk-2" aria-label="Crane Load Test">
       <h4>Crane Load Test – Logistics Hub</h4>
       <p>Overload test 125% SWL required before recommissioning.</p>
       <span class="risk-level high">HIGH RISK</span>
     </div>
-    <div class="risk-card" id="risk-3">
+    <div class="risk-card" id="risk-3" aria-label="Electrical Panel Audit">
       <h4>Electrical Panel Audit – Building C</h4>
       <p>Thermographic inspection complete. Minor findings logged.</p>
       <span class="risk-level low">LOW RISK</span>
     </div>
-    <div class="risk-card" id="risk-4">
+    <div class="risk-card" id="risk-4" aria-label="Fire Suppression System">
       <h4>Fire Suppression System – Server Room</h4>
       <p>Novec 1230 system annual service. Certificate expires 2024-06-30.</p>
       <span class="risk-level medium">MEDIUM RISK</span>
     </div>
   </div>
   <div class="section-title">Recent Assessments</div>
-  <button id="add-assessment-btn"
-          onclick="alert('New assessment form opened')">
-    + New Assessment
-  </button>
-  <table id="safety-table">
-    <thead>
-      <tr>
-        <th>ID</th><th>Facility</th><th>Type</th>
-        <th>Standard</th><th>Inspector</th><th>Status</th>
-      </tr>
-    </thead>
+  <button id="add-assessment-btn" onclick="alert('New assessment form opened')" aria-label="Create New Assessment">+ New Assessment</button>
+  <table id="safety-table" role="table" aria-label="Safety Assessments">
+    <thead><tr><th>ID</th><th>Facility</th><th>Type</th><th>Standard</th><th>Inspector</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td>SA-2024-0114</td><td>Alcalá Plant</td>
-          <td>Machinery safety</td><td>ISO 45001</td>
-          <td>Weber, T.</td><td>Closed</td></tr>
-      <tr><td>SA-2024-0113</td><td>Bilbao Port</td>
-          <td>Crane inspection</td><td>FEM 1.001</td>
-          <td>López, J.</td><td>In progress</td></tr>
-      <tr><td>SA-2024-0112</td><td>Zaragoza Hub</td>
-          <td>Fire safety</td><td>EN 1838</td>
-          <td>Sánchez, M.</td><td>Closed</td></tr>
+      <tr><td>SA-2024-0114</td><td>Alcalá Plant</td><td>Machinery safety</td><td>ISO 45001</td><td>Weber, T.</td><td>Closed</td></tr>
+      <tr><td>SA-2024-0113</td><td>Bilbao Port</td><td>Crane inspection</td><td>FEM 1.001</td><td>López, J.</td><td>In progress</td></tr>
+      <tr><td>SA-2024-0112</td><td>Zaragoza Hub</td><td>Fire safety</td><td>EN 1838</td><td>Sánchez, M.</td><td>Closed</td></tr>
     </tbody>
   </table>
 </div>
