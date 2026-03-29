@@ -3,6 +3,7 @@
 This diagram shows in plain English how the automatic tests work for the new Java web app.
 
 ```mermaid
+%%{ init: { 'flowchart': { 'curve': 'basis' }, 'theme': 'base', 'themeVariables': { 'fontSize': '18px' } } }%%
 flowchart TD
     A[PinoLopez/java<br/>GitHub Repository — main source code] 
     --> B[GitHub Actions<br/>Automatically starts when someone saves changes or submits a request]
