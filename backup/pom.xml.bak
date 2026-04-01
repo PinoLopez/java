@@ -12,13 +12,9 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cucumber.version>7.15.0</cucumber.version>
-        <selenium.version>4.21.0</selenium.version>
-        <axe.version>4.10.0</axe.version>
-        <baseUrl>https://pinolopez.github.io/java/mock-app</baseUrl>
     </properties>
 
     <dependencies>
-        <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -30,13 +26,6 @@
             <version>${cucumber.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-        
-        <!-- JUnit 5 -->
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.10.2</version>
@@ -47,26 +36,20 @@
             <artifactId>junit-platform-suite</artifactId>
             <version>1.10.2</version>
         </dependency>
-        
-        <!-- Selenium (includes built-in Selenium Manager for driver handling) -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
+            <version>4.21.0</version>
         </dependency>
-        
-        <!-- Axe Core Selenium (Accessibility Testing) -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.8.0</version>
+        </dependency>
         <dependency>
             <groupId>com.deque.html.axe-core</groupId>
             <artifactId>selenium</artifactId>
-            <version>${axe.version}</version>
-        </dependency>
-        
-        <!-- Apache HttpClient for API tests -->
-        <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
-            <version>5.3.1</version>
+            <version>4.8.0</version>
         </dependency>
     </dependencies>
 
@@ -76,20 +59,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-                <configuration>
-                    <systemPropertyVariables>
-                        <baseUrl>${baseUrl}</baseUrl>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

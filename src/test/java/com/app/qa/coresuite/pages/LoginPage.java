@@ -1,6 +1,6 @@
-package com.wikipedia.tests.pages;
+package com.app.qa.coresuite.pages;
 
-import com.wikipedia.tests.support.HighlightHelper;
+import com.app.qa.coresuite.support.HighlightHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

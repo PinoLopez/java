@@ -1,0 +1,108 @@
+package com.app.qa.coresuite.stepdefinitions;
+
+import com.app.qa.coresuite.support.TestContext;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class NfrPerformanceStepDefinitions {
+
+    private final TestContext context;
+    private int threadCount;
+    private final List<Long> responseTimes = Collections.synchronizedList(new ArrayList<>());
+    private final List<Boolean> successes = Collections.synchronizedList(new ArrayList<>());
+
+    public NfrPerformanceStepDefinitions(TestContext context) {
+        this.context = context;
+    }
+
+    @Given("the mock server is available for load testing")
+    public void mockAvailableForLoad() throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest req = HttpRequest.newBuilder()
+            .uri(URI.create(context.getBaseUrl() + "/index.html"))  // Changed
+            .timeout(Duration.ofSeconds(10))
+            .GET().build();
+        HttpResponse<String> res = client.send(req,
+            HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, res.statusCode(),
+            "Mock server not available for load testing: " + context.getBaseUrl());  // Changed
+    }
+
+    @Given("a JMeter test plan targets the login page with {int} threads")
+    public void configureThreads(int threads) {
+        this.threadCount = threads;
+        responseTimes.clear();
+        successes.clear();
+        System.out.println("Load test configured: " + threads
+            + " concurrent threads → " + context.getBaseUrl() + "/index.html");  // Changed
+    }
+
+    @When("JMeter executes the load test")
+    public void executeLoadTest() throws Exception {
+        ExecutorService pool = Executors.newFixedThreadPool(threadCount);
+        List<Future<?>> futures = new ArrayList<>();
+
+        for (int i = 0; i < threadCount; i++) {
+            futures.add(pool.submit(() -> {
+                try {
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest req = HttpRequest.newBuilder()
+                        .uri(URI.create(context.getBaseUrl() + "/index.html"))  // Changed
+                        .timeout(Duration.ofSeconds(10))
+                        .GET().build();
+                    long start = System.currentTimeMillis();
+                    HttpResponse<String> res = client.send(req,
+                        HttpResponse.BodyHandlers.ofString());
+                    long elapsed = System.currentTimeMillis() - start;
+                    responseTimes.add(elapsed);
+                    successes.add(res.statusCode() == 200);
+                    System.out.println("  Thread response: " + elapsed + "ms  status=" + res.statusCode());
+                } catch (Exception e) {
+                    responseTimes.add(10000L);
+                    successes.add(false);
+                    System.err.println("  Thread error: " + e.getMessage());
+                }
+            }));
+        }
+        for (Future<?> f : futures) f.get();
+        pool.shutdown();
+        System.out.println("Load test complete. Samples: " + responseTimes.size());
+    }
+
+    @Then("the average response time is below {int} milliseconds")
+    public void avgResponseTimeBelow(int maxMs) {
+        assertFalse(responseTimes.isEmpty(), "No response time samples recorded");
+        double avg = responseTimes.stream()
+            .mapToLong(Long::longValue)
+            .average()
+            .orElse(0);
+        System.out.println("Average response time: " + avg + "ms (threshold: " + maxMs + "ms)");
+        assertTrue(avg < maxMs,
+            "Average response time " + avg + "ms exceeds threshold of " + maxMs + "ms");
+    }
+
+    @Then("the error rate is below {int} percent")
+    public void errorRateBelow(int maxPct) {
+        long total = successes.size();
+        long errors = successes.stream().filter(s -> !s).count();
+        double rate = total > 0 ? (errors * 100.0 / total) : 0;
+        System.out.println("Error rate: " + rate + "% (threshold: " + maxPct + "%)");
+        assertTrue(rate < maxPct,
+            "Error rate " + rate + "% exceeds threshold of " + maxPct + "%");
+    }
+}

@@ -1,0 +1,30 @@
+package com.app.qa.coresuite.support;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import java.time.Duration;
+
+public class Hooks {
+    @Before
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new"); // Required for Mint/Xvfb
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        
+        ChromeDriver driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        TestContext.setDriver(driver);
+    }
+
+    @After
+    public void tearDown() {
+        if (TestContext.getDriver() != null) {
+            TestContext.getDriver().quit();
+        }
+    }
+}

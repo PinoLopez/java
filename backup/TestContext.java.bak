@@ -1,0 +1,8 @@
+package com.app.qa.coresuite.support;
+import org.openqa.selenium.WebDriver;
+
+public class TestContext {
+    private static WebDriver driver;
+    public static void setDriver(WebDriver driverInstance) { driver = driverInstance; }
+    public static WebDriver getDriver() { return driver; }
+}

@@ -1,6 +1,6 @@
-package com.wikipedia.tests.stepdefinitions;
+package com.app.qa.coresuite.stepdefinitions;
 
-import com.wikipedia.tests.support.TestContext;
+import com.app.qa.coresuite.support.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

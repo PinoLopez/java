@@ -1,4 +1,4 @@
-package com.wikipedia.tests.support;
+package com.app.qa.coresuite.support;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

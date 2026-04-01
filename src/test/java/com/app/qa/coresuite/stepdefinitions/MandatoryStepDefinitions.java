@@ -1,0 +1,58 @@
+package com.app.qa.coresuite.stepdefinitions;
+
+import com.app.qa.coresuite.support.TestContext;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MandatoryStepDefinitions {
+
+    private final TestContext context;
+    private int lastStatusCode;
+    private String lastResponseBody;
+    private String baseUrl;
+
+    public MandatoryStepDefinitions(TestContext context) {
+        this.context = context;
+    }
+
+    @Given("the mock server base URL is configured")
+    public void mockServerBaseUrlConfigured() {
+        this.baseUrl = context.getBaseUrl();  // Changed from TestContext.getBaseUrl()
+        assertNotNull(baseUrl, "Base URL must not be null");
+        System.out.println("Using base URL: " + baseUrl);
+    }
+
+    @When("a GET request is sent to {string}")
+    public void getRequest(String path) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(baseUrl + path))
+            .GET()
+            .build();
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+        lastStatusCode = response.statusCode();
+        lastResponseBody = response.body();
+        System.out.println("GET " + path + " → Status: " + lastStatusCode);
+    }
+
+    @Then("the HTTP response status is {int}")
+    public void httpResponseStatusIs(int expected) {
+        assertEquals(expected, lastStatusCode,
+            "HTTP status mismatch for last request to " + baseUrl);
+    }
+
+    @Then("the response body contains {string}")
+    public void responseBodyContains(String text) {
+        assertTrue(lastResponseBody.contains(text),
+            "Response body does not contain: '" + text + "'");
+    }
+}
