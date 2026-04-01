@@ -3,7 +3,7 @@
 **Document ID:** TP-CORESUITE-001  
 **Version:** 1.0.0  
 **Date:** April 2026  
-**Author:** QA Tester Engineer — Pino Lopez  
+**Author:** QA Tester Engineer — Juan Pino  
 **Status:** Approved — Ready for Production Replacement  
 
 ---
@@ -247,7 +247,7 @@ Defects found during automated test execution are captured as:
 
 | Role | Name | Status |
 |---|---|---|
-| QA Engineer | Pino Lopez | ✅ Approved |
+| QA Engineer | Juan Pino | ✅ Approved |
 | QA Lead | — | Pending |
 | Tech Lead | — | Pending |
 | Compliance Officer | — | Pending |

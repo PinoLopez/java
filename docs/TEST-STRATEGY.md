@@ -3,7 +3,7 @@
 **Document ID:** TS-CORESUITE-001  
 **Version:** 1.0.0  
 **Date:** April 2026  
-**Author:** QA Tester Engineer — Pino Lopez  
+**Author:** QA Tester Engineer — Juan Pino  
 **Audience:** QA teams, architects, DevOps engineers, auditors, stakeholders  
 **Status:** Approved  
 
@@ -206,7 +206,7 @@ GitHub Actions (ubuntu-latest)
 
 | Role | Name | Signature | Date |
 |---|---|---|---|
-| QA Engineer | Pino Lopez | ✅ | April 2026 |
+| QA Engineer | Juan Pino | ✅ | April 2026 |
 | QA Lead | — | Pending | — |
 | Architect | — | Pending | — |
 | Compliance Officer | — | Pending | — |

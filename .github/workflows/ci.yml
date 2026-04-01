@@ -1,4 +1,4 @@
-name: CoreSuite Acceptance Tests (Dekra-Ready)
+name: CoreSuite Acceptance Tests (Production Ready)
 
 on:
   push:
