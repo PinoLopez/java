@@ -1,4 +1,4 @@
-name: CoreSuite Acceptance Tests
+name: CoreSuite Acceptance Tests (Dekra-Ready)
 
 on:
   push:
@@ -14,9 +14,7 @@ permissions:
 jobs:
   test-and-report:
     runs-on: ubuntu-latest
-
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -38,66 +36,43 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Start mock server
+      - name: Start mock server (Bitbucket-style)
         run: |
           cd mock-app
-          nohup python3 -m http.server 8090 --bind 127.0.0.1 \
-            > /tmp/mock-server.log 2>&1 &
+          nohup python3 -m http.server 8090 --bind 127.0.0.1 > /tmp/mock-server.log 2>&1 &
           echo $! > /tmp/mock-server.pid
-          sleep 3
-          curl -sf http://127.0.0.1:8090/index.html > /dev/null \
-            && echo "Mock server OK" \
-            || (echo "Mock server failed:" && cat /tmp/mock-server.log && exit 1)
+          sleep 4
+          curl -sf http://127.0.0.1:8090/index.html || (echo "Mock server failed" && cat /tmp/mock-server.log && exit 1)
 
-      - name: Run tests and generate report
+      - name: Run full test suite
         run: |
-          mvn verify \
+          mvn clean verify \
             -Dheadless=true \
             -Dchromium.binary="${{ steps.setup-chrome.outputs.chrome-path }}" \
             -Dmock.server.port=8090 \
             -Dskip.mock.server=true \
-            "-Dcucumber.filter.tags=not @docker and not @owasp" \
             --no-transfer-progress
 
       - name: Stop mock server
         if: always()
-        run: kill $(cat /tmp/mock-server.pid) 2>/dev/null || true
+        run: pkill -f "http.server 8090" || true
 
-      - name: Show report files generated
-        if: always()
-        run: |
-          echo "=== cucumber-json ===" 
-          ls target/cucumber-json/ 2>/dev/null || echo "no json"
-          echo "=== cucumber-report ==="
-          ls cucumber-report/ 2>/dev/null || echo "no report dir"
-          echo "=== cucumber-html-reports ==="
-          ls cucumber-report/cucumber-html-reports/ 2>/dev/null || echo "no html reports"
-
-      - name: Prepare Pages content
+      - name: Prepare report for GitHub Pages
         if: always()
         run: |
           mkdir -p gh-pages-content
           if [ -d "cucumber-report/cucumber-html-reports" ]; then
             cp -r cucumber-report/cucumber-html-reports/. gh-pages-content/
-            echo "Report files copied:"
-            ls gh-pages-content/
-          else
-            echo "WARNING: no report found"
+            echo "Report copied successfully"
           fi
           cp -r mock-app gh-pages-content/mock-app
-          cat > gh-pages-content/index.html << 'EOF'
+          cat > gh-pages-content/index.html << 'HTML'
           <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="UTF-8"/>
-            <meta http-equiv="refresh" content="0;url=overview-features.html"/>
-            <title>CoreSuite Test Report</title>
-          </head>
-          <body><p>Redirecting to <a href="overview-features.html">test report</a>…</p></body>
-          </html>
-          EOF
+          <html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=overview-features.html"></head>
+          <body><p>Redirecting to CoreSuite Test Report...</p></body></html>
+          HTML
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy report to GitHub Pages (like Bitbucket artifact)
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -105,3 +80,11 @@ jobs:
           publish_dir: ./gh-pages-content
           publish_branch: gh-pages
           force_orphan: true
+
+      - name: Upload full report as artifact (Bitbucket-style)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-html-report
+          path: cucumber-report/cucumber-html-reports/
+          retention-days: 30
