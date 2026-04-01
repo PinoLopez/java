@@ -4,7 +4,7 @@
 [![Live Report](https://img.shields.io/badge/Report-GitHub%20Pages-blue)](https://pinolopez.github.io/java/)
 [![Mock App](https://img.shields.io/badge/Demo-Mock%20App-green)](https://pinolopez.github.io/java/mock-app/)
 
-> **Context:** A large German inspection and certification organisation (Dekra-scale) is retiring its 20-year-old Softproject X4 Designer BPMS and replacing it with a modern Java (Spring Boot / Jakarta EE) web application. This repository contains the complete automated acceptance test suite for that replacement.
+> **Context:** A large German inspection and certification organisation (TechDeck) is retiring its 20-year-old Softproject X4 Designer BPMS and replacing it with a modern Java (Spring Boot / Jakarta EE) web application. This repository contains the complete automated acceptance test suite for that replacement.
 
 ---
 

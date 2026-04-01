@@ -11,7 +11,7 @@
 
 ## 1. Context and Strategic Objective
 
-A large German inspection and certification organisation (Dekra-scale) is retiring its 20-year-old **Softproject X4 Designer BPMS** and replacing it with **TechDeck CoreSuite**, a modern Java (Spring Boot / Jakarta EE) web application.
+A large German inspection and certification organisation (TechDeck) is retiring its 20-year-old **Softproject X4 Designer BPMS** and replacing it with **TechDeck CoreSuite**, a modern Java (Spring Boot / Jakarta EE) web application.
 
 The test strategy defines the **why** behind every testing decision: why BDD, why this tool stack, why these test categories, and why this execution order. It governs all test activities from local development through CI to the GitHub Pages live report.
 
@@ -27,7 +27,7 @@ Testing begins at the feature file level, before any code is written. Gherkin sc
 ### BDD — Behaviour-Driven Development
 We use Cucumber 7 + Gherkin because:
 
-- Scenarios are written in plain English, readable by non-technical stakeholders (auditors, compliance officers, Dekra management)
+- Scenarios are written in plain English, readable by non-technical stakeholders (auditors, compliance officers, TechDeck management)
 - Feature files are living documentation — they describe what the system does, not just whether tests pass
 - Changes to the UI only require changes in Page Object classes, not in feature files — keeping maintenance cost low
 - Tags (`@smoke`, `@e2e`, `@regression`, `@nfr`, `@docker`, `@mandatory`) allow selective execution at any granularity

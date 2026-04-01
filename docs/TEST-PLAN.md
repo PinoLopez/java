@@ -10,7 +10,7 @@
 
 ## 1. Introduction and Objective
 
-This Test Plan governs the complete acceptance testing of the **TechDeck CoreSuite** Java web application, which is replacing the legacy **Softproject X4 Designer BPMS** (in service for over 20 years) at a large German inspection and certification organisation (Dekra-scale).
+This Test Plan governs the complete acceptance testing of the **TechDeck CoreSuite** Java web application, which is replacing the legacy **Softproject X4 Designer BPMS** (in service for over 20 years) at a large German inspection and certification organisation (TechDeck).
 
 The objective is to provide documented, repeatable, automated evidence that the new system is functionally correct, performant, secure, accessible, and compliant with EU data protection law (DSGVO/GDPR) before go-live.
 
