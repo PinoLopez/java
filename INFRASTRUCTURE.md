@@ -37,6 +37,3 @@ graph TD
 ---
 
 *TechDeck CoreSuite — Test Infrastructure | QA Engineer: Juan Pino | April 2026*
-```
-
----
