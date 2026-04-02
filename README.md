@@ -62,7 +62,9 @@ See full diagram: [INFRASTRUCTURE.md](https://github.com/PinoLopez/java/blob/mas
 
 ---
 
-## Vehicle Inspection KPIs (Simplified)
+## Vehicle Inspection KPIs
+
+> A KPI (Key Performance Indicator) is a measurable value that shows how effectively the system is tracking inspection activity. The table below shows the main KPIs displayed in the Vehicle Inspection module.
 
 | KPI | What It Means |
 |-----|---------------|

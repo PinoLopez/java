@@ -193,16 +193,6 @@ GitHub Actions (ubuntu-latest)
 
 ---
 
-## 9. Approval
-
-| Role | Name | Signature | Date |
-|---|---|---|---|
-| QA Engineer | Juan Pino | ✅ | April 2026 |
-| QA Lead | — | Pending | — |
-| Architect | — | Pending | — |
-| Compliance Officer | — | Pending | — |
-
----
 
 *This strategy is fully aligned with `docs/TEST-PLAN.md`, `README.md`, and `INFRASTRUCTURE.md`.*  
 *CoreSuite TS-CORESUITE-001 v1.0.0 — April 2026*
