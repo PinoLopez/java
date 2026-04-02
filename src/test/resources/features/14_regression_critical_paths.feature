@@ -6,7 +6,7 @@ Feature: Regression – Critical path verification
 
   Scenario: Login still works after changes
     Given the CoreSuite login page is open
-    When the inspector enters username "inspector" and password "suite2024"
+    When the inspector enters username "inspector" and password "suite2026"
     And clicks the Sign In button
     Then the dashboard page is displayed
 

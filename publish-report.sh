@@ -1,37 +1,36 @@
 #!/bin/bash
 set -e
 
-echo "📤 Publishing Cucumber Report to GitHub Pages..."
+echo "Publishing Cucumber Report to GitHub Pages..."
 
-# Save current branch
 CURRENT_BRANCH=$(git branch --show-current)
 echo "Current branch: $CURRENT_BRANCH"
 
-# Ensure report exists
-if [ ! -f "target/cucumber-report.html" ]; then
-    echo "❌ No report found. Run tests first: mvn clean verify"
+if [ ! -d "cucumber-report/cucumber-html-reports" ]; then
+    echo "No report found. Run tests first: mvn clean verify"
     exit 1
 fi
 
-# Copy report to temp
-cp target/cucumber-report.html /tmp/overview-features.html
-echo "✅ Report copied to temp location"
+cp -r cucumber-report/cucumber-html-reports /tmp/cucumber-html-reports
+echo "Report copied to temp location"
 
-# Fetch and checkout gh-pages
 git fetch origin gh-pages
 git checkout gh-pages
 git pull origin gh-pages
 
-# Copy report (force overwrite)
-cp -f /tmp/overview-features.html ./overview-features.html
+cp -rf /tmp/cucumber-html-reports/. ./
+cp -r mock-app ./mock-app
 
-# Commit and push
-git add overview-features.html
+cat > index.html << 'HTML'
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=overview-features.html"></head>
+<body><p>Redirecting to CoreSuite Test Report...</p></body></html>
+HTML
+
+git add -A
 git commit -m "Update Cucumber test report - $(date +%Y-%m-%d-%H-%M)" || echo "No changes"
 git push origin gh-pages
 
-# Return to original branch
-git checkout $CURRENT_BRANCH
-
-echo "✅ Report published!"
-echo "📄 View at: https://pinolopez.github.io/java/overview-features.html"
+git checkout "$CURRENT_BRANCH"
+echo "Report published."
+echo "View at: https://pinolopez.github.io/java/overview-features.html"

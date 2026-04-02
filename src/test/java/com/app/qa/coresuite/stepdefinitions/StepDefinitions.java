@@ -82,7 +82,7 @@ public class StepDefinitions {
     public void theInspectorIsLoggedInToCoreSuite() {
         context.getLoginPage().open(context.getBaseUrl());
         context.getLoginPage().enterUsername("inspector");
-        context.getLoginPage().enterPassword("suite2024");
+        context.getLoginPage().enterPassword("suite2026");
         context.getLoginPage().clickSignIn();
         assertTrue(context.getDashboardPage().isNavigationVisible());
     }

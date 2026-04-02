@@ -6,7 +6,7 @@ Feature: E2E – Full vehicle inspection journey
 
   Scenario: Inspector completes a full vehicle inspection search journey
     Given the CoreSuite login page is open
-    When the inspector enters username "inspector" and password "suite2024"
+    When the inspector enters username "inspector" and password "suite2026"
     And clicks the Sign In button
     Then the dashboard page is displayed
     When the inspector clicks the "Vehicle Inspection" module card
