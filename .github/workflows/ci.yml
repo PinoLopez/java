@@ -44,7 +44,7 @@ jobs:
           sleep 4
           curl -sf http://127.0.0.1:8090/index.html || (echo "Mock server failed" && cat /tmp/mock-server.log && exit 1)
 
-- name: Run full test suite
+      - name: Run full test suite
         run: |
           mvn clean verify \
             -Dheadless=true \
