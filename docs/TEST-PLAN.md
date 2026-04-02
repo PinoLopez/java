@@ -243,16 +243,3 @@ Defects found during automated test execution are captured as:
 
 ---
 
-## 9. Approvals and Sign-off
-
-| Role | Name | Status |
-|---|---|---|
-| QA Engineer | Juan Pino | ✅ Approved |
-| QA Lead | — | Pending |
-| Tech Lead | — | Pending |
-| Compliance Officer | — | Pending |
-
----
-
-*This Test Plan is fully aligned with `docs/TEST-STRATEGY.md`, `README.md`, and `INFRASTRUCTURE.md`.*  
-*CoreSuite TP-CORESUITE-001 v1.0.0 — April 2026*

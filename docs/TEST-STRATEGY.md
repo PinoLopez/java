@@ -44,27 +44,18 @@ Every page of the application has exactly one corresponding Java class in `src/t
 
 ---
 
-## 3. Test Pyramid and Layer Rationale
+## 3. Test Layers
 
-```
-                    ┌──────────────────────────┐
-                    │   NFR / Security / DSGVO  │   ← Slowest, run every build
-                    │   OWASP ZAP / axe-core    │
-                 ┌──┴──────────────────────────┴──┐
-                 │   End-to-End (E2E)              │   ← Full browser journeys
-                 │   Regression                    │
-              ┌──┴────────────────────────────────┴──┐
-              │   Smoke Advanced (navigation)         │   ← Module reachability
-           ┌──┴──────────────────────────────────────┴──┐
-           │   Smoke Basic (HTTP 200)                    │   ← Fastest, always first
-           │   API / Mandatory Integration               │
-        ┌──┴────────────────────────────────────────────┴──┐
-        │   Docker On/Off (environment lifecycle)           │   ← Infrastructure layer
-        └────────────────────────────────────────────────────┘
-```
+| Layer | Purpose | Tools | Duration |
+|-------|---------|-------|----------|
+| Smoke Basic | HTTP 200 checks, app responds | Java HttpClient | < 5 sec |
+| Smoke Advanced | All modules reachable | Selenium | ~1 min |
+| E2E Journeys | Complete user workflows | Selenium + Cucumber | ~2 min |
+| Regression | Critical paths still work | Selenium + Cucumber | ~2 min |
+| NFR Tests | Security, accessibility, GDPR | OWASP ZAP, axe-core | ~1 min |
+| Infrastructure | Docker starts/stops correctly | Docker Compose | ~5 min |
 
-The pyramid is intentional: fast, cheap tests run first and act as gates. If Smoke Basic fails (the app is not even up), there is no point running E2E or OWASP ZAP — the build fails immediately and saves CI minutes.
-
+Tests run in order from fastest to slowest. If Smoke Basic fails, the build stops immediately to save CI time.
 ---
 
 ## 4. Test Categories — Why, How, When
