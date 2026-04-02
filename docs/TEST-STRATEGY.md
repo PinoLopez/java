@@ -22,7 +22,7 @@ The test strategy defines the **why** behind every testing decision: why BDD, wh
 ## 2. Testing Philosophy
 
 ### Shift Left
-Testing begins at the feature file level, before any code is written. Gherkin scenarios are agreed between QA, developers, and business before implementation starts. This eliminates ambiguity and reduces rework.
+Shift Left means testing as early as possible — instead of testing at the end, we write and agree on test scenarios before any code is written. Problems are caught early when they are cheap to fix, rather than late when they are expensive.
 
 ### BDD — Behaviour-Driven Development
 We use Cucumber 7 + Gherkin because:
