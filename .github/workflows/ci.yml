@@ -62,8 +62,8 @@ jobs:
         if: always()
         run: |
           mkdir -p gh-pages-content
-          if [ -d "cucumber-report/cucumber-html-reports" ]; then
-            cp -r cucumber-report/cucumber-html-reports/. gh-pages-content/
+          if [ -f "target/cucumber-report.html" ]; then
+            cp target/cucumber-report.html gh-pages-content/overview-features.html
             echo "Report copied successfully"
           fi
           cp -r mock-app gh-pages-content/mock-app
